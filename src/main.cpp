@@ -15,11 +15,6 @@ typedef struct Solucao {
 	double valorObj;
 } Solucao;
 
-typedef struct QCel {
-	double d;
-	int orig;
-} QCel;
-
 bool carregaMatrizAdj( double*** matrizAdj, int* dim, string arquivo );
 void imprimeMatrizAdj( double** matrizAdj, int dim );
 
@@ -119,13 +114,13 @@ Solucao calculaCaminho( double** matrizAdj, int dim ) {
 	vector<int> lista;	
 	vector<int> profundidades;
 		
-	int visitados[ dim ];
+	double distancias[ dim ][ dim ];
+	int origens[ dim ][ dim ];
 	
-	QCel matriz[ dim ][ dim ];
 	for( int i = 0; i < dim; i++ ) {
 		for( int j = 0; j < dim; j++ ) {		
-			matriz[ i ][ j ].d = -1;
-			matriz[ i ][ j ].orig = -1;
+			distancias[ i ][ j ] = -1;
+			origens[ i ][ j ] = -1;
 		}
 	}
 			
@@ -140,7 +135,7 @@ Solucao calculaCaminho( double** matrizAdj, int dim ) {
 		profundidades.pop_back();	
 												
 		if ( profundidade == dim && k == 0 ) {			
-			double d = matriz[ profundidade-1 ][ 0 ].d;									
+			double d = distancias[ profundidade-1 ][ 0 ];									
 			if ( d < s.valorObj ) {			
 				s.valorObj = d;	
 				int orig = 0;			
@@ -148,21 +143,22 @@ Solucao calculaCaminho( double** matrizAdj, int dim ) {
 				s.sequencia.clear();
 				s.sequencia.push_back( orig );					
 				for( int p = dim-1; p >= 0; p-- ) {						
-					orig = matriz[ p ][ orig ].orig;
+					orig = origens[ p ][ orig ];
 					s.sequencia.push_back( orig );					
 				}	
 				reverse( s.sequencia.begin(), s.sequencia.end() );				
-			}
-	  
-   			if ( profundidades.size()-1 > 0 ) {
-   				int prof = profundidades[ profundidades.size()-1 ];
-   				int orig = 0;
-			    for( int p = dim-1; p >= prof; p-- ) {
-			    	for( int j = 0; j < dim; j++ ) {											
-						matriz[ p ][ j ].d = -1;
-						matriz[ p ][ j ].orig = -1;				
+			}	     									
+		}
+		
+		if ( profundidade == dim ) {		
+			if ( profundidades.size() > 0 ) {
+				int prof = profundidades[ profundidades.size() - 1 ];
+				for( int p = dim-1; p >= prof; p-- ) {
+					for( int j = 0; j < dim; j++ ) {			    	
+						distancias[ p ][ j ] = -1;
+						origens[ p ][ j ] = -1;				
 					}
-				}			   		
+				}
 			}
 		}
 		
@@ -170,20 +166,22 @@ Solucao calculaCaminho( double** matrizAdj, int dim ) {
 			if ( i != k && matrizAdj[ k ][ i ] != -1 ) {
 				bool processar = true;
 				for( int p = 1; processar && p < profundidade; p++ )
-					if ( matriz[ p ][ k ].orig == i )
+					if ( origens[ p ][ k ] == i )
 						processar = false;								
 						
 				if ( i == 0 && profundidade < dim-1 )
 					processar = false;														
 				
 				if ( processar ) { 
-					double d = ( profundidade > 0 ? matriz[ profundidade-1 ][ k ].d : 0 ) + matrizAdj[ k ][ i ];					
-					if ( d < matriz[ profundidade ][ i ].d || matriz[ profundidade ][ i ].d == -1 ) {					
-						matriz[ profundidade ][ i ].d = d;	
-						matriz[ profundidade ][ i ].orig = k;	
-													
-						lista.push_back( i );
-						profundidades.push_back( profundidade+1 );						
+					double d = ( profundidade > 0 ? distancias[ profundidade-1 ][ k ] : 0 ) + matrizAdj[ k ][ i ];					
+					if ( d < distancias[ profundidade ][ i ] || distancias[ profundidade ][ i ] == -1 ) {																		
+						if ( i != 0 || ( i == 0 && d < s.valorObj ) ) {
+							distancias[ profundidade ][ i ] = d;	                     
+							origens[ profundidade ][ i ] = k;
+							
+							lista.push_back( i );
+							profundidades.push_back( profundidade+1 );	
+						}																															   			   								
 					}
 				}												
 			}

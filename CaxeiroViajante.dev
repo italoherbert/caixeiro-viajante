@@ -24,7 +24,7 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=caixeiroviajante,caixeiroviajante/metaeuristica,caixeiroviajante/minhasolucao
+Folders=caixeiroviajante,caixeiroviajante/metaheuristica,caixeiroviajante/minhasolucao
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
@@ -121,9 +121,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=src\caixeiroviajante\metaeuristica\CaixeiroViajanteMetaEuristica.cpp
+FileName=CaixeiroViajanteMetaHeuristica.cpp
 CompileCpp=1
-Folder=caixeiroviajante/metaeuristica
+Folder=caixeiroviajante/metaheuristica
 Compile=1
 Link=1
 Priority=1000
@@ -131,9 +131,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=src\caixeiroviajante\metaeuristica\CaixeiroViajanteMetaEuristica.h
+FileName=CaixeiroViajanteMetaHeuristica.h
 CompileCpp=1
-Folder=caixeiroviajante/metaeuristica
+Folder=caixeiroviajante/metaheuristica
 Compile=1
 Link=1
 Priority=1000

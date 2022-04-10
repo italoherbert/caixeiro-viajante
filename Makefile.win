@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = bin/main.o bin/readData.o bin/CaixeiroViajante.o bin/CaixeiroViajanteMinhaSolucao.o
-LINKOBJ  = bin/main.o bin/readData.o bin/CaixeiroViajante.o bin/CaixeiroViajanteMinhaSolucao.o
+OBJ      = bin/main.o bin/CaixeiroViajanteMinhaSolucao.o bin/CaixeiroViajante.o bin/readData.o bin/CaixeiroViajanteMetaEuristica.o
+LINKOBJ  = bin/main.o bin/CaixeiroViajanteMinhaSolucao.o bin/CaixeiroViajante.o bin/readData.o bin/CaixeiroViajanteMetaEuristica.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
@@ -27,11 +27,14 @@ $(BIN): $(OBJ)
 bin/main.o: src/main.cpp
 	$(CPP) -c src/main.cpp -o bin/main.o $(CXXFLAGS)
 
-bin/readData.o: src/readData.cpp
-	$(CPP) -c src/readData.cpp -o bin/readData.o $(CXXFLAGS)
+bin/CaixeiroViajanteMinhaSolucao.o: src/caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.cpp
+	$(CPP) -c src/caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.cpp -o bin/CaixeiroViajanteMinhaSolucao.o $(CXXFLAGS)
 
-bin/CaixeiroViajante.o: src/CaixeiroViajante.cpp
-	$(CPP) -c src/CaixeiroViajante.cpp -o bin/CaixeiroViajante.o $(CXXFLAGS)
+bin/CaixeiroViajante.o: src/caixeiroviajante/CaixeiroViajante.cpp
+	$(CPP) -c src/caixeiroviajante/CaixeiroViajante.cpp -o bin/CaixeiroViajante.o $(CXXFLAGS)
 
-bin/CaixeiroViajanteMinhaSolucao.o: src/CaixeiroViajanteMinhaSolucao.cpp
-	$(CPP) -c src/CaixeiroViajanteMinhaSolucao.cpp -o bin/CaixeiroViajanteMinhaSolucao.o $(CXXFLAGS)
+bin/readData.o: src/caixeiroviajante/readData.cpp
+	$(CPP) -c src/caixeiroviajante/readData.cpp -o bin/readData.o $(CXXFLAGS)
+
+bin/CaixeiroViajanteMetaEuristica.o: src/caixeiroviajante/metaeuristica/CaixeiroViajanteMetaEuristica.cpp
+	$(CPP) -c src/caixeiroviajante/metaeuristica/CaixeiroViajanteMetaEuristica.cpp -o bin/CaixeiroViajanteMetaEuristica.o $(CXXFLAGS)

@@ -1,4 +1,4 @@
-#include "CaixeiroViajanteMinhaSolucao.h"
+#include "caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h"
 
 #include <iostream>
 

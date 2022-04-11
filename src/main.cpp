@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-	CaixeiroViajanteMetaHeuristica cv;
+	CaixeiroViajanteMinhaSolucao cv;
 
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );

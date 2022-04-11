@@ -9,13 +9,8 @@ typedef struct InsercaoInfo {
 } InsersaoInfo;
 
 class CaixeiroViajanteMetaHeuristica : public CaixeiroViajante {
-	
-	private:
-		vector<InsersaoInfo> calculaInsercaoInfos( vector<int>& sequencia, int k );
-		void ordenaPorCusto( vector<InsercaoInfo>& insersaoInfos );
-	
-	public:
-		Solucao construcao();
+		
+	public:						
 		Solucao calculaCaminho();
 	
 };

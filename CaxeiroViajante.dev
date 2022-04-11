@@ -61,16 +61,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=src\caixeiroviajante\minhasolucao\CaixeiroViajanteMinhaSolucao.cpp
-CompileCpp=1
-Folder=caixeiroviajante/minhasolucao
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit4]
 FileName=src\caixeiroviajante\minhasolucao\CaixeiroViajanteMinhaSolucao.h
 CompileCpp=1
 Folder=caixeiroviajante/minhasolucao
@@ -80,7 +70,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit5]
+[Unit4]
 FileName=src\caixeiroviajante\CaixeiroViajante.cpp
 CompileCpp=1
 Folder=caixeiroviajante
@@ -90,7 +80,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit6]
+[Unit5]
 FileName=src\caixeiroviajante\CaixeiroViajante.h
 CompileCpp=1
 Folder=caixeiroviajante
@@ -100,7 +90,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit7]
+[Unit6]
 FileName=src\caixeiroviajante\readData.cpp
 CompileCpp=1
 Folder=caixeiroviajante
@@ -110,7 +100,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
+[Unit7]
 FileName=src\caixeiroviajante\readData.h
 CompileCpp=1
 Folder=caixeiroviajante
@@ -120,8 +110,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit8]
+FileName=src\caixeiroviajante\metaheuristica\CaixeiroViajanteMetaHeuristica.cpp
+CompileCpp=1
+Folder=caixeiroviajante/metaheuristica
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit9]
-FileName=CaixeiroViajanteMetaHeuristica.cpp
+FileName=src\caixeiroviajante\metaheuristica\CaixeiroViajanteMetaHeuristica.h
 CompileCpp=1
 Folder=caixeiroviajante/metaheuristica
 Compile=1
@@ -131,9 +131,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=CaixeiroViajanteMetaHeuristica.h
+FileName=src\caixeiroviajante\minhasolucao\CaixeiroViajanteMinhaSolucao.cpp
 CompileCpp=1
-Folder=caixeiroviajante/metaheuristica
+Folder=caixeiroviajante/minhasolucao
 Compile=1
 Link=1
 Priority=1000

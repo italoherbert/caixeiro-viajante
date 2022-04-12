@@ -32,7 +32,7 @@ void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
 				break;			
 		}
 		
-		if ( !houveAproveitamento ) {
+		if ( houveAproveitamento ) {
 			opcoes = { 0, 1, 2, 3, 4 };
 		} else {
 			opcoes.erase( opcoes.begin() + r );

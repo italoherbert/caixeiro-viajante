@@ -1,6 +1,8 @@
 #ifndef CAIXEIRO_VIAJANTE_METAHEURISTICA_H
 #define CAIXEIRO_VIAJANTE_METAHEURISTICA_H
 
+#include <vector>
+
 #include "../CaixeiroViajante.h"
 
 typedef struct InsercaoInfo {
@@ -9,6 +11,9 @@ typedef struct InsercaoInfo {
 } InsersaoInfo;
 
 class CaixeiroViajanteMetaHeuristica : public CaixeiroViajante {
+		
+	private:
+		void perturbacao( vector<int>& sequencia );	
 		
 	public:						
 		Solucao calculaCaminho();

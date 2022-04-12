@@ -2,12 +2,26 @@
 #include "caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.h"
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 int main(int argc, char** argv) {
 	CaixeiroViajanteMetaHeuristica cv;
 
+	/*
+	vector<int> vet = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	
+	int i = 5;
+	for( int c = 0; c < 3; c++ )
+		vet.erase( vet.begin() + i );
+		
+	cout << "VET= ";
+	for( int c = 0; c < vet.size(); c++ )
+		cout << vet[ c ] << "  ";
+	cout << endl;
+	*/
+	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
 		strcpy( inst, "instances/burma14.tsp" );

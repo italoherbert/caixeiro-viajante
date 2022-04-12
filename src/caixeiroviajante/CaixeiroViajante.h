@@ -21,6 +21,8 @@ class CaixeiroViajante {
 		bool carregaMatrizAdj( string arquivo );
 		void imprimeMatrizAdj();
 				
+		double calculaCusto( vector<int> nos );		
+				
 		void readTSPData( int argc, char** argv );
 		void printData();
 		

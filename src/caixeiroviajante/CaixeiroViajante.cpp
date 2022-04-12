@@ -37,6 +37,15 @@ bool CaixeiroViajante::carregaMatrizAdj( string arquivo ) {
 	return false;
 }
 
+double CaixeiroViajante::calculaCusto( vector<int> nos ) {
+	double d = 0;
+	for( int i = 0; i < nos.size()-1; i++ ) {
+		int j = ( i < nos.size()-1 ? i+1 : 0 );
+		d += matrizAdj[ nos[ i ] ][ nos[ j ] ];
+	}
+	return d;
+}
+
 void CaixeiroViajante::imprimeSolucao( Solucao solucao ) {
 	cout << endl;
 	printf( "Menor distancia: %.2f\n", solucao.valorObj );

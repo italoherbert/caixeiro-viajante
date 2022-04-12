@@ -1,11 +1,12 @@
-#include "Construcao.h"
-
+#include <iostream>
 #include <vector>
 #include <cfloat>
 #include <cmath>
 #include <ctime>
 #include <algorithm>
 #include <iterator>
+
+#include "Construcao.h"
 
 Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 	vector<int> nos;
@@ -20,7 +21,7 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		nos.erase( nos.begin() + r );
 	}	
 	
-	srand( time( NULL ) );
+	srand( time( NULL ) );	
 		
 	while( !nos.empty() ) {
 		int r = rand() % nos.size();
@@ -39,11 +40,11 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 	}
 		
 	double valorObj = 0;
-	for( int i = 0; i < sequencia.size(); i++ ) {
-		int j = ( sequencia.size() - 1 ? i+1 : 0 );
+	for( int i = 0; i < sequencia.size()-1; i++ ) {
+		int j = ( i < sequencia.size() - 1 ? i+1 : 0 );
 		valorObj += matrizAdj[ sequencia[ i ] ][ sequencia[ j ] ];
 	}	
-				
+					
 	Solucao s = { sequencia, valorObj };			
 	return s;
 }

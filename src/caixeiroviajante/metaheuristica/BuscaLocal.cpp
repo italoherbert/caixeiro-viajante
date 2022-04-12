@@ -8,7 +8,35 @@
 #include <iterator>
 
 void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
-	
+	vector<int> opcoes = { 0, 1 };
+		
+	while( !opcoes.empty() ) {
+		int r = rand() % opcoes.size();
+		bool houveAproveitamento = false;
+		switch( opcoes[ r ] ) {
+			case 0:
+				houveAproveitamento = this->bestImprovementSwap( matrizAdj, dim, s );
+				break;
+			case 1:
+				houveAproveitamento = this->bestImprovement2Opt( matrizAdj, dim, s );
+				break;			
+			case 2:
+				houveAproveitamento = this->bestImprovementOrOpt( matrizAdj, dim, s, 1 );
+				break;
+			case 3:
+				houveAproveitamento = this->bestImprovementOrOpt( matrizAdj, dim, s, 2 );
+				break;
+			case 4: 
+				houveAproveitamento = this->bestImprovementOrOpt( matrizAdj, dim, s, 3 );
+				break;			
+		}
+		
+		if ( !houveAproveitamento ) {
+			opcoes = { 0, 1, 2, 3, 4 };
+		} else {
+			opcoes.erase( opcoes.begin() + r );
+		}
+	}
 }
 
 bool BuscaLocal::bestImprovementSwap( double** matrizAdj, int dim, Solucao* s ) {

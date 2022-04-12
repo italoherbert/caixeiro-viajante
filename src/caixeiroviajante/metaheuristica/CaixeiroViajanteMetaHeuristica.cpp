@@ -1,7 +1,7 @@
 #include "CaixeiroViajanteMetaHeuristica.h"
 #include "Construcao.h"
+#include "BuscaLocal.h"
 
-#include <iostream>
 #include <vector>
 #include <cfloat>
 #include <cmath>
@@ -11,6 +11,10 @@
 
 Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {	
 	Construcao c;	
-	return c.construcao( matrizAdj, dim );
+	BuscaLocal bl;
+	
+	Solucao solucao = c.construcao( matrizAdj, dim );
+	bl.buscaLocal( matrizAdj, dim, &solucao );
+	return solucao;
 }
 

@@ -38,7 +38,28 @@ double BuscaLocal::calcula2OptCusto( double** matrizAdj, int dim, int i, int j )
 }
 
 double BuscaLocal::calculaOrOptCusto( double** matrizAdj, int dim, int i, int j, int k ) {
-	return 0;
+	double dk = 0;
+	
+	int i1 = i;
+	int i2;
+	for( int c = 0; c < k-1; c++ ) {
+		i2 = i1 < dim-1 ? i1+1 : 0;
+		
+		dk += matrizAdj[ i1 ][ i2 ];
+		
+		i1 = i2;
+	}
+	i1 = i;
+
+	int i0 = i < dim-1 ? i+1 : 0;	
+	int i3 = i2 > 0 ? i2-1 : dim-1;	
+	
+	int j1 = j;
+	int j2 = j < dim-1 ? j+1 : 0;
+			
+	double subD = dk + matrizAdj[ i0 ][ i1 ] + matriz[ i2 ][ i3 ] + matrizAdj[ j1 ][ j2 ];
+	double somaD = dk + matrizAdj[ j1 ][ i1 ] + matrizAdj[ j2 ][ i2 ];
+	return somaD - subD;
 }
 
 void BuscaLocal::exec2Opt( double** matrizAdj, int dim, vector<int>& sequencia, int i, int j ) {

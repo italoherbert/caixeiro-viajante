@@ -9,7 +9,7 @@
 #include "BuscaLocal.h"
 
 void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
-	vector<int> opcoes = { 0 };
+	vector<int> opcoes = { 0, 1, 2, 3, 4 };
 		
 	while( !opcoes.empty() ) {
 		int r = rand() % opcoes.size();
@@ -33,7 +33,7 @@ void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
 		}
 		
 		if ( !houveAproveitamento ) {
-			opcoes = { 0 };
+			opcoes = { 0, 1, 2, 3, 4 };
 		} else {
 			opcoes.erase( opcoes.begin() + r );
 		}
@@ -135,9 +135,7 @@ double BuscaLocal::calcula2OptCusto( double** matrizAdj, int dim, vector<int>& s
 	return matrizAdj[ elI ][ elJ ] + matrizAdj[ elI2 ][ elJ2 ] - ( matrizAdj[ elI ][ elI2 ] + matrizAdj[ elJ ][ elJ2 ] );
 }
 
-double BuscaLocal::calculaOrOptCusto( double** matrizAdj, int dim, vector<int>& sequencia, int i, int j, int k ) {
-	double dk = 0;
-	
+double BuscaLocal::calculaOrOptCusto( double** matrizAdj, int dim, vector<int>& sequencia, int i, int j, int k ) {	
 	int ik = i;
 	for( int c = 0; c < k-1; c++ )
 		ik = ik < dim-1 ? ik+1 : 0;									
@@ -153,8 +151,8 @@ double BuscaLocal::calculaOrOptCusto( double** matrizAdj, int dim, vector<int>& 
 	int elI3 = sequencia[ i3 ];
 	
 	int elJ = sequencia[ j ];
-	int elJ2 = sequencia[ j2 ];		
-			
+	int elJ2 = sequencia[ j2 ];	
+								
 	double somaD = matrizAdj[ elI ][ elJ2 ] + matrizAdj[ elIK ][ elJ ] + matrizAdj[ elI0 ][ elI3 ];
 	double subD = matrizAdj[ elI0 ][ elI ] + matrizAdj[ elIK ][ elI3 ] + matrizAdj[ elJ ][ elJ2 ];
 	return somaD - subD;		
@@ -169,11 +167,11 @@ void BuscaLocal::exec2Opt( double** matrizAdj, int dim, vector<int>& sequencia, 
 void BuscaLocal::execOrOpt( double** matrizAdj, int dim, vector<int>& sequencia, int i, int j, int k ) {
 	vector<int> vet;
 		
-	for( int c = k-1; c >= 0; c-- )
-		vet.push_back( sequencia[ i+c ] );
-		
+	for( int c = k-1; c >=0; c-- )
+		vet.push_back( sequencia[ i+c ] );				
+				
 	for( int c = 0; c < k; c++ )
 		sequencia.erase( sequencia.begin() + i );	
 				
-	sequencia.insert( sequencia.begin() + j, vet.begin(), vet.end() );
+	sequencia.insert( sequencia.begin() + j - k + 1, vet.begin(), vet.end() );
 }

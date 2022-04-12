@@ -12,23 +12,74 @@ void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
 }
 
 bool BuscaLocal::bestImprovementSwap( double** matrizAdj, int dim, Solucao* s ) {
-	return true;
+	double melhorDelta = 0;
+	double melhorI, melhorJ;
+	for( int i = 1; i < s->sequencia.size(); i++ ) {
+		for( int j = i+1; j < s->sequencia.size(); j++ ) {
+			double delta = this->calculaSwapCusto( matrizAdj, dim, i, j );
+			if ( delta < melhorDelta ) {
+				melhorI = i;
+				melhorJ = j;
+				melhorDelta = delta;
+			}
+		}
+	}
+	if ( melhorDelta < 0 ) {
+		swap( s->sequencia[ melhorI ], s->sequencia[ melhorJ ] );
+		s->valorObj += melhorDelta;
+		return true;
+	}
+	return false;
 }
 
 bool BuscaLocal::bestImprovement2Opt( double** matrizAdj, int dim, Solucao* s ) {
-	return true;
+	double melhorDelta = 0;
+	double melhorI, melhorJ;
+	for( int i = 1; i < s->sequencia.size(); i++ ) {
+		for( int j = i+1; j < s->sequencia.size(); j++ ) {
+			double delta = this->calcula2OptCusto( matrizAdj, dim, i, j );
+			if ( delta < melhorDelta ) {
+				melhorI = i;
+				melhorJ = j;
+				melhorDelta = delta;
+			}
+		}
+	}
+	if ( melhorDelta < 0 ) {
+		this->exec2Opt( matrizAdj, dim, s->sequencia, melhorI, melhorJ );
+		s->valorObj += melhorDelta;
+		return true;
+	}
+	return false;
 }
 
 bool BuscaLocal::bestImprovementOrOpt( double** matrizAdj, int dim, Solucao* s, int k ) {
-	return true;
+	double melhorDelta = 0;
+	double melhorI, melhorJ;
+	for( int i = 1; i < s->sequencia.size(); i++ ) {
+		for( int j = i+1; j < s->sequencia.size(); j++ ) {
+			double delta = this->calculaOrOptCusto( matrizAdj, dim, i, j, k );
+			if ( delta < melhorDelta ) {
+				melhorI = i;
+				melhorJ = j;
+				melhorDelta = delta;
+			}
+		}
+	}
+	if ( melhorDelta < 0 ) {
+		this->execOrOpt( matrizAdj, dim, s->sequencia, melhorI, melhorJ, k );
+		s->valorObj += melhorDelta;
+		return true;
+	}
+	return false;
 }
 
 double BuscaLocal::calculaSwapCusto( double** matrizAdj, int dim, int i, int j ) {
-	int i1 = i > 0 ? i-1 : dim-1;
+	int i0 = i > 0 ? i-1 : dim-1;
 	int i2 = i < dim-1 ? i+1 : 0;
-	int j1 = j > 0 ? j-1 : dim-1;
+	int j0 = j > 0 ? j-1 : dim-1;
 	int j2 = j < dim-1 ? j+1 : 0;
-	return matrizAdj[ i ][ i-1 ] + matrizAdj[ i ][ i+1 ] - ( matrizAdj[ j ][ j-1 ] + matrizAdj[ j ][ j+1 ] );
+	return matrizAdj[ i0 ][ j ] + matrizAdj[ j ][ i2 ] - ( matrizAdj[ j0 ][ i ] + matrizAdj[ i ][ j2 ] );
 }
 
 double BuscaLocal::calcula2OptCusto( double** matrizAdj, int dim, int i, int j ) {
@@ -57,15 +108,25 @@ double BuscaLocal::calculaOrOptCusto( double** matrizAdj, int dim, int i, int j,
 	int j1 = j;
 	int j2 = j < dim-1 ? j+1 : 0;
 			
-	double subD = dk + matrizAdj[ i0 ][ i1 ] + matriz[ i2 ][ i3 ] + matrizAdj[ j1 ][ j2 ];
+	double subD = dk + matrizAdj[ i0 ][ i1 ] + matrizAdj[ i2 ][ i3 ] + matrizAdj[ j1 ][ j2 ];
 	double somaD = dk + matrizAdj[ j1 ][ i1 ] + matrizAdj[ j2 ][ i2 ];
 	return somaD - subD;
 }
 
 void BuscaLocal::exec2Opt( double** matrizAdj, int dim, vector<int>& sequencia, int i, int j ) {
-	
+	int i2 = i > 0 ? i-1 : dim-1;
+	int j2 = j < dim-1 ? j+1 : 0;
+	for( int c = 0; c <= abs(i2-j2)/2; c++ )
+		swap( sequencia[ i2+c ], sequencia[ j2-c ] );			
 }
 
 void BuscaLocal::execOrOpt( double** matrizAdj, int dim, vector<int>& sequencia, int i, int j, int k ) {
+	int i2 = i;
+	for( int c = 0; c < k-1; c++ )
+		i2 = i2 < dim-1 ? i2+1 : 0;					
+
+	sequencia.erase( sequencia.begin() + i, sequencia.begin() + i2 );
 	
+	for( int c = 0; c < k-1; c++ )
+		sequencia.insert( sequencia.begin() + j+c, sequencia[ i+c ] );	
 }

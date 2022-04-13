@@ -11,9 +11,8 @@ typedef struct InsercaoInfo {
 } InsersaoInfo;
 
 class CaixeiroViajanteMetaHeuristica : public CaixeiroViajante {
-				
+						
 	public:	
-		CaixeiroViajanteMetaHeuristica();
 		Solucao calculaCaminho();
 	
 };

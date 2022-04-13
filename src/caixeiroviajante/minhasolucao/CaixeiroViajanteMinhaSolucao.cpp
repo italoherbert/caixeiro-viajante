@@ -7,7 +7,7 @@
 Solucao CaixeiroViajanteMinhaSolucao::calculaCaminho() {	
 	Solucao s;
 	s.sequencia = {};
-	s.valorObj = DBL_MAX;
+	s.custo = DBL_MAX;
 	
 	vector<int> lista;	
 	vector<int> profundidades;	
@@ -34,8 +34,8 @@ Solucao CaixeiroViajanteMinhaSolucao::calculaCaminho() {
 												
 		if ( profundidade == dim && k == 0 ) {			
 			double d = distancias[ profundidade-1 ][ 0 ];									
-			if ( d < s.valorObj ) {			
-				s.valorObj = d;	
+			if ( d < s.custo ) {			
+				s.custo = d;	
 				int orig = 0;			
 				
 				s.sequencia.clear();
@@ -72,7 +72,7 @@ Solucao CaixeiroViajanteMinhaSolucao::calculaCaminho() {
 				if ( processar ) { 
 					double d = ( profundidade > 0 ? distancias[ profundidade-1 ][ k ] : 0 ) + matrizAdj[ k ][ i ];					
 					
-					if ( d >= s.valorObj ) {
+					if ( d >= s.custo ) {
 						parar = true;
 					} else {								
 						distancias[ profundidade ][ i ] = d;	                     

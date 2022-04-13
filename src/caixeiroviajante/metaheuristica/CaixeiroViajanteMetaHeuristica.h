@@ -12,10 +12,11 @@ typedef struct InsercaoInfo {
 
 class CaixeiroViajanteMetaHeuristica : public CaixeiroViajante {
 		
-	private:
+	private:		
 		void perturbacao( vector<int>& sequencia );	
 		
-	public:						
+	public:	
+		CaixeiroViajanteMetaHeuristica();
 		Solucao calculaCaminho();
 	
 };

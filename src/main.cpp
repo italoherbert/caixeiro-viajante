@@ -25,9 +25,7 @@ int main(int argc, char** argv) {
     cv.readTSPData( argc, argv );
     		
 	cout << "Buscando solucao..." << endl;
-		
-	cv.imprimeMatrizAdj();	
-		
+				
 	Solucao s = cv.calculaCaminho();
 	cv.imprimeSolucao( s );
     

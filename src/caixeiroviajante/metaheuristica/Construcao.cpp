@@ -9,20 +9,21 @@
 #include "Construcao.h"
 
 Solucao Construcao::construcao( double** matrizAdj, int dim ) {
+	srand( time( NULL ) );				
+	
 	vector<int> nos;
-	for( int i = 0; i < dim; i++ )
+	for( int i = 1; i < dim; i++ )
 		nos.push_back( i );
-		
-	vector<int> sequencia;	
+				
+	vector<int> sequencia;
+	sequencia.push_back( 0 );		
 	
 	for( int i = 0; i < 3; i++ ) {
 		int r = rand() % nos.size();
 		sequencia.push_back( nos[ r ] );
 		nos.erase( nos.begin() + r );
-	}	
-	
-	srand( time( NULL ) );	
-		
+	}			
+			
 	while( !nos.empty() ) {
 		int r = rand() % nos.size();
 		int k = nos[ r ];
@@ -38,25 +39,27 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		nos.erase( nos.begin() + r );
 		sequencia.insert( sequencia.begin() + i, k );
 	}
-		
-	double valorObj = 0;
+	
+	sequencia.push_back( 0 );
+	
+	double custo = 0;
 	for( int i = 0; i < sequencia.size()-1; i++ ) {
 		int j = ( i < sequencia.size() - 1 ? i+1 : 0 );
-		valorObj += matrizAdj[ sequencia[ i ] ][ sequencia[ j ] ];
+		custo += matrizAdj[ sequencia[ i ] ][ sequencia[ j ] ];
 	}	
 					
-	Solucao s = { sequencia, valorObj };			
+	Solucao s = { sequencia, custo };			
 	return s;
 }
 
 vector<InsersaoInfo> Construcao::calculaInsercaoInfos( double** matrizAdj, int dim, vector<int>& sequencia, int k ) {
 	vector<InsercaoInfo> infos;
 		
-    for( int i = 0; i < sequencia.size(); i++ ) {
-    	int j = ( i < sequencia.size()-1 ? i+1 : 0 );
+    for( int i = 0; i < sequencia.size()-1; i++ ) {
+    	int j = i+1;
 
     	InsersaoInfo info;
-		info.noI = i;
+		info.noI = i+1;
     	info.custo = matrizAdj[i][k] + matrizAdj[j][k] - matrizAdj[i][j];
     	
     	infos.push_back( info );

@@ -10,10 +10,11 @@
 
 void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
 	vector<int> opcoes = { 0, 1, 2, 3, 4 };
-		
+
+	bool houveAproveitamento = false;
+	
 	while( !opcoes.empty() ) {
 		int r = rand() % opcoes.size();
-		bool houveAproveitamento = false;
 		switch( opcoes[ r ] ) {
 			case 0:
 				houveAproveitamento = this->bestImprovementSwap( matrizAdj, dim, s );
@@ -36,7 +37,7 @@ void BuscaLocal::buscaLocal( double** matrizAdj, int dim, Solucao* s ) {
 			opcoes = { 0, 1, 2, 3, 4 };
 		} else {
 			opcoes.erase( opcoes.begin() + r );
-		}
+		}		
 	}
 }
 
@@ -55,7 +56,7 @@ bool BuscaLocal::bestImprovementSwap( double** matrizAdj, int dim, Solucao* s ) 
 	}
 	if ( melhorDelta < 0 ) {
 		swap( s->sequencia[ melhorI ], s->sequencia[ melhorJ ] );
-		s->valorObj += melhorDelta;
+		s->custo += melhorDelta;
 		return true;
 	}
 	return false;
@@ -65,7 +66,7 @@ bool BuscaLocal::bestImprovement2Opt( double** matrizAdj, int dim, Solucao* s ) 
 	double melhorDelta = 0;
 	double melhorI, melhorJ;
 	for( int i = 1; i < s->sequencia.size()-1; i++ ) {
-		for( int j = i+1; j < s->sequencia.size()-1; j++ ) {
+		for( int j = i+3; j < s->sequencia.size()-1; j++ ) {
 			double delta = this->calcula2OptCusto( matrizAdj, dim, s->sequencia, i, j );
 			if ( delta < melhorDelta ) {
 				melhorI = i;
@@ -76,7 +77,7 @@ bool BuscaLocal::bestImprovement2Opt( double** matrizAdj, int dim, Solucao* s ) 
 	}
 	if ( melhorDelta < 0 ) {
 		this->exec2Opt( matrizAdj, dim, s->sequencia, melhorI, melhorJ );
-		s->valorObj += melhorDelta;
+		s->custo += melhorDelta;
 		return true;
 	}
 	return false;
@@ -86,7 +87,7 @@ bool BuscaLocal::bestImprovementOrOpt( double** matrizAdj, int dim, Solucao* s, 
 	double melhorDelta = 0;
 	double melhorI, melhorJ;
 	for( int i = 1; i < s->sequencia.size()-1; i++ ) {
-		for( int j = i+1; j < s->sequencia.size()-1; j++ ) {
+		for( int j = i+k+2; j < s->sequencia.size()-1; j++ ) {
 			double delta = this->calculaOrOptCusto( matrizAdj, dim, s->sequencia, i, j, k );
 			if ( delta < melhorDelta ) {
 				melhorI = i;
@@ -97,7 +98,7 @@ bool BuscaLocal::bestImprovementOrOpt( double** matrizAdj, int dim, Solucao* s, 
 	}
 	if ( melhorDelta < 0 ) {
 		this->execOrOpt( matrizAdj, dim, s->sequencia, melhorI, melhorJ, k );
-		s->valorObj += melhorDelta;
+		s->custo += melhorDelta;
 		return true;
 	}
 	return false;

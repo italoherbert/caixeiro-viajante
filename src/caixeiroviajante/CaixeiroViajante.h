@@ -8,7 +8,7 @@ using namespace std;
 
 typedef struct Solucao {	
 	vector<int> sequencia;
-	double valorObj;
+	double custo;
 } Solucao;
 
 class CaixeiroViajante {

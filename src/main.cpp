@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/att532.tsp" );
+		strcpy( inst, "instances/burma14.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;
@@ -130,14 +130,7 @@ int main22( int argc, char** argv ) {
     cv.readTSPData( argc, argv );
     		
 	cout << "Buscando solucao..." << endl;
-		
-	Solucao s = c.construcao( cv.matrizAdj, cv.dim );
-	for( int i = 0; i < 1000; i++ ) {		
-		bl.buscaLocal( cv.matrizAdj, cv.dim, &s );
-		p.perturbacao( s.sequencia );
-		cout << i << endl;
-	}
-		
+				
 	cout << "Fim" << endl;	
 			
 	return 0;

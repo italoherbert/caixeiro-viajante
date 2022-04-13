@@ -48,7 +48,5 @@ void Perturbacao::perturbacao( vector<int>& sequencia ) {
 	} else {
 		sequencia.insert( sequencia.begin() + r2, v1.begin(), v1.end() );
 		sequencia.insert( sequencia.begin() + r1+pinter2, v2.begin(), v2.end() );
-	}	
-	cout << rr << "  " << r1 << "  " << r2 << endl;				
-	
+	}		
 }

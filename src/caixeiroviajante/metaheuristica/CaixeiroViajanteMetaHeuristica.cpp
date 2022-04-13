@@ -46,17 +46,12 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 						
 			s.sequencia.clear();
 			copy( melhorSequencia.begin(), melhorSequencia.end(), back_inserter( s.sequencia ) );
-			
-			this->imprimeSequencia( s.sequencia );									
-			
+						
 			per.perturbacao( s.sequencia );
 			s.custo = 0;
 			for( int k = 0; k < s.sequencia.size()-1; k++ )
 				s.custo += matrizAdj[ s.sequencia[ k ] ][ s.sequencia[ k+1 ] ];				
 			j++;
-			
-			this->imprimeSequencia( s.sequencia );									
-			cout << endl;
 		}				
 				
 		if ( melhorCusto < globalMelhorCusto ) {		

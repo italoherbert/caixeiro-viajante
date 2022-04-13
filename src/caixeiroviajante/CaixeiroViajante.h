@@ -27,6 +27,8 @@ class CaixeiroViajante {
 		void printData();
 		
 		void imprimeSolucao( Solucao solucao );
+
+		void imprimeSequencia( vector<int> sequencia );
 		
 		virtual Solucao calculaCaminho() = 0;
 	

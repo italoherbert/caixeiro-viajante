@@ -1,5 +1,5 @@
 [Project]
-filename=CaxeiroViajante.dev
+filename=CaixeiroViajante.dev
 name=CaixeiroViajante
 Type=1
 Ver=2
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;8;0;0;0
-UnitCount=13
+UnitCount=15
 
 [VersionInfo]
 Major=1
@@ -172,6 +172,26 @@ BuildCmd=
 
 [Unit13]
 FileName=src\caixeiroviajante\metaheuristica\BuscaLocal.h
+CompileCpp=1
+Folder=caixeiroviajante/metaheuristica
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit14]
+FileName=src\caixeiroviajante\metaheuristica\Perturbacao.cpp
+CompileCpp=1
+Folder=caixeiroviajante/metaheuristica
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit15]
+FileName=src\caixeiroviajante\metaheuristica\Perturbacao.h
 CompileCpp=1
 Folder=caixeiroviajante/metaheuristica
 Compile=1

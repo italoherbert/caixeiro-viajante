@@ -43,10 +43,8 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 	sequencia.push_back( 0 );
 	
 	double custo = 0;
-	for( int i = 0; i < sequencia.size()-1; i++ ) {
-		int j = ( i < sequencia.size() - 1 ? i+1 : 0 );
-		custo += matrizAdj[ sequencia[ i ] ][ sequencia[ j ] ];
-	}	
+	for( int i = 0; i < sequencia.size()-1; i++ )
+		custo += matrizAdj[ sequencia[ i ] ][ sequencia[ i+1 ] ];	
 					
 	Solucao s = { sequencia, custo };			
 	return s;

@@ -55,6 +55,13 @@ void CaixeiroViajante::imprimeSolucao( Solucao solucao ) {
 	cout << endl;
 }
 
+void CaixeiroViajante::imprimeSequencia( vector<int> sequencia ) {
+	cout << "Sequencia: ";
+	for( int i = 0; i < sequencia.size(); i++ ) 
+		cout << sequencia[ i ] << "  ";
+	cout << endl;
+}
+
 void CaixeiroViajante::imprimeMatrizAdj() {
 	cout << endl;
 	cout << "Matriz de adjacencia: " << endl;

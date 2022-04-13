@@ -6,6 +6,7 @@
 
 #include "caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h"
 #include "caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.h"
+#include "caixeiroviajante/metaheuristica/Construcao.h"
 #include "caixeiroviajante/metaheuristica/BuscaLocal.h"
 #include "caixeiroviajante/metaheuristica/Perturbacao.h"
 
@@ -16,7 +17,7 @@ int main(int argc, char** argv) {
 	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/burma14.tsp" );
+		strcpy( inst, "instances/att532.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;
@@ -110,17 +111,34 @@ int main1(int argc, char** argv) {
     return 0;
 }
 
-int main9() {
+int main22( int argc, char** argv ) {
 	CaixeiroViajanteMetaHeuristica cv;	
+	Construcao c;
+	BuscaLocal bl;
 	Perturbacao p;
 	
-	vector<int> sequencia = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1 };
-
-	cv.imprimeSequencia( sequencia );	
-	
-	p.perturbacao( sequencia );
-	
-	cv.imprimeSequencia( sequencia );
-	
+	if ( argc < 2 ) {		
+		char* inst = (char*) malloc( 100 * sizeof( char ) );
+		strcpy( inst, "instances/a280.tsp" );
+		
+		argv = (char**) malloc( 2 * sizeof( char* ) );
+		argv[1] = inst;
+		
+		argc = 2;
+	}
+			
+    cv.readTSPData( argc, argv );
+    		
+	cout << "Buscando solucao..." << endl;
+		
+	Solucao s = c.construcao( cv.matrizAdj, cv.dim );
+	for( int i = 0; i < 1000; i++ ) {		
+		bl.buscaLocal( cv.matrizAdj, cv.dim, &s );
+		p.perturbacao( s.sequencia );
+		cout << i << endl;
+	}
+		
+	cout << "Fim" << endl;	
+			
 	return 0;
 }

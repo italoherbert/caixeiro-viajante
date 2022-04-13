@@ -12,12 +12,11 @@ typedef struct Solucao {
 } Solucao;
 
 class CaixeiroViajante {
-	
-	protected:
+				
+	public:
 		double** matrizAdj;
 		int dim;
-			
-	public:
+		
 		bool carregaMatrizAdj( string arquivo );
 		void imprimeMatrizAdj();
 				

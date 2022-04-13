@@ -34,7 +34,7 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 		melhorCusto = s.custo;
 				
 		int j = 0;
-		while( j < 10 ) {			
+		while( j < 10 ) {		
 			bl.buscaLocal( matrizAdj, dim, &s );
 						
 		    if ( s.custo < melhorCusto ) {

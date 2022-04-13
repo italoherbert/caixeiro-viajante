@@ -48,7 +48,7 @@ double CaixeiroViajante::calculaCusto( vector<int> nos ) {
 
 void CaixeiroViajante::imprimeSolucao( Solucao solucao ) {
 	cout << endl;
-	printf( "Menor distancia: %.2f\n", solucao.valorObj );
+	printf( "Menor distancia: %.2f\n", solucao.custo );
 	cout << "Ordem de vertices: ";
 	for( int i = 0; i < solucao.sequencia.size(); i++ ) 
 		cout << (solucao.sequencia[ i ]+1) << "  ";

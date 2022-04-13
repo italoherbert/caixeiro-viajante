@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
+#include <ctime>
 
 #include "caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h"
 #include "caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.h"
@@ -9,7 +10,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
+int main6(int argc, char** argv) {
 	CaixeiroViajanteMetaHeuristica cv;
 	
 	if ( argc < 2 ) {		
@@ -49,7 +50,7 @@ int main2() {
 	return 0;		
 }
 
-int main6(int argc, char** argv) {
+int main1(int argc, char** argv) {
 	BuscaLocal cv;
 	
 	double mat[7][7] = {
@@ -106,4 +107,35 @@ int main6(int argc, char** argv) {
 	cout << "Dist: " << dist + custo << endl;
     
     return 0;
+}
+
+int main() {
+	int pinter1 = 2;
+	int pinter2 = 3;
+	
+	vector<int> sequencia = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+	
+	srand( time( NULL ) );
+	
+	int i = 0;
+	do {			
+		int r1,r2;
+
+		int rr = rand() % 2;
+		cout << "(" <<i<< ") " << endl;
+		if ( rr == 0 ) {
+			r1 = ( rand() % ( sequencia.size() - pinter2 - 2 ) ) + 1;		
+			cout << "(" <<i<< ") " << endl;
+			r2 = ( rand() % ( sequencia.size() - r1 - pinter1 ) ) + r1 + pinter1;
+		} else {
+			r1 = ( rand() % ( sequencia.size() - pinter1 - 2 ) ) + pinter2 + 1 ;
+			cout << "(" <<i<< ") " << endl;
+			r2 = ( rand() % ( r1 - pinter2 - 1 ) ) + 1;
+		}
+		
+		cout << "(" <<i<< ") -> "<< rr << "  " << r1 << "  " << r2 << endl;
+		
+		i++;
+	} while( i <= 100 );
+	return 0;
 }

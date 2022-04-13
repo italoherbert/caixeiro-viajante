@@ -110,7 +110,7 @@ int main1(int argc, char** argv) {
     return 0;
 }
 
-int main_2() {
+int main9() {
 	CaixeiroViajanteMetaHeuristica cv;	
 	Perturbacao p;
 	

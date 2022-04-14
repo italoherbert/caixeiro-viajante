@@ -50,7 +50,7 @@ int main( int argc, char** argv ) {
 		
 		argc = 2;
 	}
-				
+					
     cv.readTSPData( argc, argv );
     		
 	cout << "Buscando solucao..." << endl;

@@ -19,8 +19,13 @@ void Perturbacao::perturbacao( vector<int>& sequencia ) {
 		inter2 = aux;
 	}
 	
-	int r1 = ( rand() % ( sequencia.size() - 2 - ( inter1 + inter2 ) ) ) + 1 ;
-	int	r2 = r1 + inter1 + ( rand() % ( sequencia.size() - 2 - ( r1 + inter1 ) - inter2 ) ) + 1;		
+	int r1 = 1;
+	if ( ( sequencia.size() - 2 - ( inter1 + inter2 ) ) > 0 )
+		r1 = ( rand() % ( sequencia.size() - 2 - ( inter1 + inter2 ) ) ) + 1 ;
+		
+	int r2 = r1 + inter1 + 1;
+	if ( sequencia.size() - 2 - ( r1 + inter1 ) - inter2 > 0 )
+		r2 = r1 + inter1 + ( rand() % ( sequencia.size() - 2 - ( r1 + inter1 ) - inter2 ) ) + 1;		
 		
 	vector<int> v1;
 	for( int i = 0; i < inter1; i++ )

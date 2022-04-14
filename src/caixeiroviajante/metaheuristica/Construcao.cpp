@@ -29,8 +29,11 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		int k = nos[ r ];
 	
 		vector<InsersaoInfo> insercaoInfos = this->calculaInsercaoInfos( matrizAdj, dim, sequencia, k );		
-		this->ordenaPorCusto( insercaoInfos );
-				
+	
+		sort(insercaoInfos.begin(), insercaoInfos.end(), [](InsercaoInfo a, InsercaoInfo b){
+			return a.custo > b.custo;	
+		});
+						
 		double alpha = (double)rand() / RAND_MAX;
 
 		int r2 = rand() % ( (int)ceil( alpha * insercaoInfos.size() ) );		
@@ -64,16 +67,4 @@ vector<InsersaoInfo> Construcao::calculaInsercaoInfos( double** matrizAdj, int d
 	}
 				
 	return infos;
-}
-
-void Construcao::ordenaPorCusto( vector<InsercaoInfo>& insercaoInfos ) {
-	for( int i = 0; i < insercaoInfos.size()-1; i++ ) {
-		for( int j = i+1; j < insercaoInfos.size(); j++ ) {
-			if ( insercaoInfos[ i ].custo > insercaoInfos[ j ].custo ) {
-				InsercaoInfo aux = insercaoInfos[ i ];
-				insercaoInfos[ i ] = insercaoInfos[ j ];
-				insercaoInfos[ j ] = aux;
-			}
-		}	
-	}	
 }

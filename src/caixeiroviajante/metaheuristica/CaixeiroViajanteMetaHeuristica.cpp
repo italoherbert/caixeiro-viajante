@@ -11,16 +11,17 @@
 #include "BuscaLocal.h"
 #include "Perturbacao.h"
 
+#include "../../util/util.h"
+
 Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {	
 	Construcao c;	
 	BuscaLocal bl;
-	Perturbacao per; 
+	Perturbacao per;
 	
-	vector<int> globalMelhorSequencia;
-	vector<int> melhorSequencia;
+	long long ms1 = get_ms(); 
 	
-	double globalMelhorCusto = DBL_MAX;
-	double melhorCusto = DBL_MAX;	
+	Solucao globalMelhor;
+	globalMelhor.custo = DBL_MAX;	
 	
 	int	maxIter = 50;
 	int maxIterILS = dim;
@@ -29,28 +30,20 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 		maxIterILS /= 2;
 					
 	for( int i = 0; i < maxIter; i++ ) {
-		cout << endl << endl;
-		cout << "Construcao(" << (i+1) << " de " << maxIter << ") -> ";
 		Solucao s = c.construcao( matrizAdj, dim );
 		
-		melhorSequencia.clear();
-		copy( s.sequencia.begin(), s.sequencia.end(), back_inserter( melhorSequencia ) );
-		melhorCusto = s.custo;
-								
+		Solucao melhor = s;
+									
 		int j = 0;
 		while( j < maxIterILS ) {		
-			cout << (j+1) << "  ";
 			bl.buscaLocal( matrizAdj, dim, &s );
 						
-		    if ( s.custo < melhorCusto ) {
-				melhorSequencia.clear();
-				copy( s.sequencia.begin(), s.sequencia.end(), back_inserter( melhorSequencia ) );
-				melhorCusto = s.custo;
+		    if ( s.custo < melhor.custo ) {		    	
+				melhor = s;
 				j = 0;
 			}			
-						
-			s.sequencia.clear();
-			copy( melhorSequencia.begin(), melhorSequencia.end(), back_inserter( s.sequencia ) );
+			
+			s = melhor;
 						
 			per.perturbacao( s.sequencia );
 			s.custo = 0;
@@ -59,15 +52,17 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 			j++;
 		}				
 				
-		if ( melhorCusto < globalMelhorCusto ) {		
-			globalMelhorSequencia.clear();
-			copy( melhorSequencia.begin(), melhorSequencia.end(), back_inserter( globalMelhorSequencia ) );
-			globalMelhorCusto = melhorCusto;
+		if ( melhor.custo < globalMelhor.custo ) {	
+			globalMelhor = melhor;			
 		}
 	}			
 	
-	cout << endl << endl;
+	long long ms2 = get_ms() - ms1;
+
+	cout << endl;	
+	cout << "Tempo gasto: " << ( ms2 / 1000.0 ) << " seg" << endl;
 	
-	Solucao solucao = { globalMelhorSequencia, globalMelhorCusto };	
-	return solucao;
+	return globalMelhor;
 }
+
+

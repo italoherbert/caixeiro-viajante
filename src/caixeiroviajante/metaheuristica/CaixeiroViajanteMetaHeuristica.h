@@ -5,11 +5,6 @@
 
 #include "../CaixeiroViajante.h"
 
-typedef struct InsercaoInfo {
-	int noI;
-	double custo;
-} InsersaoInfo;
-
 class CaixeiroViajanteMetaHeuristica : public CaixeiroViajante {
 						
 	public:	

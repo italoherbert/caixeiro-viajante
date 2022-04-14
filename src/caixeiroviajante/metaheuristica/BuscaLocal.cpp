@@ -66,7 +66,7 @@ bool BuscaLocal::bestImprovement2Opt( double** matrizAdj, int dim, Solucao* s ) 
 	double melhorDelta = 0;
 	double melhorI, melhorJ;
 	for( int i = 1; i < s->sequencia.size()-1; i++ ) {
-		for( int j = i+1; j < s->sequencia.size()-2; j++ ) {
+		for( int j = i+1; j < s->sequencia.size()-3; j++ ) {
 			int jj = (j+2) % s->sequencia.size();
 			double delta = this->calcula2OptCusto( matrizAdj, dim, s->sequencia, i, jj );
 			if ( delta < melhorDelta ) {
@@ -88,7 +88,7 @@ bool BuscaLocal::bestImprovementOrOpt( double** matrizAdj, int dim, Solucao* s, 
 	double melhorDelta = 0;
 	double melhorI, melhorJ;
 	for( int i = 1; i < s->sequencia.size()-1; i++ ) {
-		for( int j = i+1; j < s->sequencia.size()-k-1; j++ ) {
+		for( int j = i+1; j < s->sequencia.size()-k-2; j++ ) {
 		 	int jj = (j+k+1) % s->sequencia.size();
 			double delta = this->calculaOrOptCusto( matrizAdj, dim, s->sequencia, i, jj, k );
 			if ( delta < melhorDelta ) {

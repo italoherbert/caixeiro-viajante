@@ -15,12 +15,12 @@
 
 using namespace std;
 
-int main33(int argc, char** argv) {
+int main231(int argc, char** argv) {
 	CaixeiroViajanteMetaHeuristica cv;
 	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/att48.tsp" );
+		strcpy( inst, "instances/burma14.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;
@@ -43,7 +43,7 @@ int main( int argc, char** argv ) {
 	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/bays29.tsp" );
+		strcpy( inst, "instances/berlin52.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;
@@ -59,6 +59,10 @@ int main( int argc, char** argv ) {
 			
 	double tempoMedio = 0;	
 	double custoMedio = 0;		
+	
+	Solucao melhor;
+	melhor.custo = DBL_MAX;
+	
 	for( int i = 0; i < n; i++ ) {		
 		long long ms1 = get_ms();	
 		Solucao s = cv.calculaCaminho();		
@@ -69,6 +73,9 @@ int main( int argc, char** argv ) {
 		
 		tempoMedio += tempo;
 		custoMedio += s.custo;
+		
+		if ( s.custo < melhor.custo )
+			melhor = s;
 	}
 	
 	tempoMedio /= n;
@@ -78,6 +85,8 @@ int main( int argc, char** argv ) {
     cout << "Arquivo: " << argv[1] << endl;
 	cout << "Tempo medio: " << tempoMedio << endl;
 	cout << "Custo medio: " << custoMedio << endl;
+	
+	cv.imprimeSolucao( melhor );
 	
 	return 0;
 }
@@ -158,27 +167,17 @@ int main1(int argc, char** argv) {
     return 0;
 }
 
-int main22( int argc, char** argv ) {
-	CaixeiroViajanteMetaHeuristica cv;	
-	Construcao c;
-	BuscaLocal bl;
+int main2342( int argc, char** argv ) {
+	CaixeiroViajanteMetaHeuristica cv;
 	Perturbacao p;
 	
-	if ( argc < 2 ) {		
-		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/a280.tsp" );
-		
-		argv = (char**) malloc( 2 * sizeof( char* ) );
-		argv[1] = inst;
-		
-		argc = 2;
+	vector<int> sequencia = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1 };
+
+	//cv.imprimeSequencia( sequencia );
+	
+	for( int i = 0; i < 100; i++ ) {	
+		p.perturbacao( sequencia );				
+		cv.imprimeSequencia( sequencia );
 	}
-			
-    cv.readTSPData( argc, argv );
-    		
-	cout << "Buscando solucao..." << endl;
-				
-	cout << "Fim" << endl;	
-			
 	return 0;
 }

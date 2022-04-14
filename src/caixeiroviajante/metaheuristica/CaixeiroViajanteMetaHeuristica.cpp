@@ -27,7 +27,7 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 					
 	for( int i = 0; i < maxIter; i++ ) {
 		Solucao s = c.construcao( matrizAdj, dim );
-		
+				
 		Solucao melhor = s;
 									
 		int j = 0;
@@ -42,12 +42,13 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 			s = melhor;
 						
 			per.perturbacao( s.sequencia );
+
 			s.custo = 0;
 			for( int k = 0; k < s.sequencia.size()-1; k++ )
 				s.custo += matrizAdj[ s.sequencia[ k ] ][ s.sequencia[ k+1 ] ];				
 			j++;			
 		}				
-				
+					
 		if ( melhor.custo < globalMelhor.custo )
 			globalMelhor = melhor;					
 	}			

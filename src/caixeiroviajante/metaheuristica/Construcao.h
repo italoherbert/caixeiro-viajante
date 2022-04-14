@@ -3,6 +3,11 @@
 
 #include "CaixeiroViajanteMetaHeuristica.h"
 
+typedef struct InsercaoInfo {
+	int noI;
+	double custo;
+} InsersaoInfo;
+
 class Construcao {
 	
 	private:		

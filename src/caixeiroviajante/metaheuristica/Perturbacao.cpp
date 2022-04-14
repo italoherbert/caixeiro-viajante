@@ -6,21 +6,16 @@
 
 #include "Perturbacao.h"
 
-void Perturbacao::perturbacao( vector<int>& sequencia ) {
-	srand( time( NULL ) );
-	
+#include "../../util/util.h"
+
+void Perturbacao::perturbacao( vector<int>& sequencia ) {	
+	srand( get_ms() );
+
 	int v10 = (int)(sequencia.size() / 10 ) - 2;
 	
 	int inter1 = 2 + ( v10 > 0 ? rand() % v10 : 0 );
 	int inter2 = 2 + ( v10 > 0 ? rand() % v10 : 0 );
-	
-	int rr = rand() % 2;
-	if ( rr == 0 ) {
-		int aux = inter1;
-		inter1 = inter2;
-		inter2 = aux;
-	}
-	
+			
 	int r1 = 1;
 	if ( ( sequencia.size() - 2 - ( inter1 + inter2 ) ) > 0 )
 		r1 = ( rand() % ( sequencia.size() - 2 - ( inter1 + inter2 ) ) ) + 1 ;
@@ -28,7 +23,7 @@ void Perturbacao::perturbacao( vector<int>& sequencia ) {
 	int r2 = r1 + inter1 + 1;
 	if ( sequencia.size() - 2 - ( r1 + inter1 ) - inter2 > 0 )
 		r2 = r1 + inter1 + ( rand() % ( sequencia.size() - 2 - ( r1 + inter1 ) - inter2 ) ) + 1;		
-		
+				
 	vector<int> v1;
 	for( int i = 0; i < inter1; i++ )
 		v1.push_back( sequencia[ r1+i ] );

@@ -8,8 +8,10 @@
 
 #include "Construcao.h"
 
+#include "../../util/util.h"
+
 Solucao Construcao::construcao( double** matrizAdj, int dim ) {
-	srand( time( NULL ) );				
+	srand( get_ms() );				
 	
 	vector<int> nos;
 	for( int i = 1; i < dim; i++ )
@@ -28,11 +30,14 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		int r = rand() % nos.size();
 		int k = nos[ r ];
 	
-		vector<InsersaoInfo> insercaoInfos = this->calculaInsercaoInfos( matrizAdj, dim, sequencia, k );		
-	
+		InsercaoInfo melhor;
+		melhor.custo = DBL_MAX;
+		
+		vector<InsersaoInfo> insercaoInfos = this->calculaInsercaoInfos( matrizAdj, dim, sequencia, k );				
+		
 		sort(insercaoInfos.begin(), insercaoInfos.end(), [](InsercaoInfo a, InsercaoInfo b){
 			return a.custo > b.custo;	
-		});
+		});		
 						
 		double alpha = (double)rand() / RAND_MAX;
 
@@ -43,7 +48,7 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		sequencia.insert( sequencia.begin() + i, k );
 	}
 	
-	sequencia.push_back( 0 );
+	sequencia.push_back( 0 );		
 	
 	double custo = 0;
 	for( int i = 0; i < sequencia.size()-1; i++ )

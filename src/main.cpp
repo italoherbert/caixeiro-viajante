@@ -43,7 +43,7 @@ int main( int argc, char** argv ) {
 	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/berlin52.tsp" );
+		strcpy( inst, "instances/brazil58.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;

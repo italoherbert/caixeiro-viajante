@@ -39,8 +39,8 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 			return a.custo > b.custo;	
 		});		
 						
-		double alpha = (double)rand() / RAND_MAX;
-
+		double alpha = ((double)rand()+1) / (RAND_MAX+1);
+		
 		int r2 = rand() % ( (int)ceil( alpha * insercaoInfos.size() ) );		
 		int i = insercaoInfos[ r2 ].noI;
 		

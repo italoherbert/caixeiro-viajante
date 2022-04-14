@@ -9,8 +9,10 @@
 void Perturbacao::perturbacao( vector<int>& sequencia ) {
 	srand( time( NULL ) );
 	
-	int inter1 = 2;
-	int inter2 = max( (int)(sequencia.size() / 10 ), 4 );
+	int v10 = (int)(sequencia.size() / 10 ) - 2;
+	
+	int inter1 = 2 + ( v10 > 0 ? rand() % v10 : 0 );
+	int inter2 = 2 + ( v10 > 0 ? rand() % v10 : 0 );
 	
 	int rr = rand() % 2;
 	if ( rr == 0 ) {

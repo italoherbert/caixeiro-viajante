@@ -201,7 +201,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit16]
-FileName=src\util\util.cpp
+FileName=src\util\util.h
 CompileCpp=1
 Folder=util
 Compile=1
@@ -211,7 +211,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit17]
-FileName=src\util\util.h
+FileName=src\util\util.c
 CompileCpp=1
 Folder=util
 Compile=1

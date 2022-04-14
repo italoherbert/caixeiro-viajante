@@ -11,22 +11,18 @@
 #include "BuscaLocal.h"
 #include "Perturbacao.h"
 
-#include "../../util/util.h"
-
 Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {	
 	Construcao c;	
 	BuscaLocal bl;
 	Perturbacao per;
-	
-	long long ms1 = get_ms(); 
-	
+		
 	Solucao globalMelhor;
 	globalMelhor.custo = DBL_MAX;	
 	
 	int	maxIter = 50;
 	int maxIterILS = dim;
 	
-	if ( maxIterILS > 150 )	
+	if ( maxIterILS >=  150 )	
 		maxIterILS /= 2;
 					
 	for( int i = 0; i < maxIter; i++ ) {
@@ -49,19 +45,13 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 			s.custo = 0;
 			for( int k = 0; k < s.sequencia.size()-1; k++ )
 				s.custo += matrizAdj[ s.sequencia[ k ] ][ s.sequencia[ k+1 ] ];				
-			j++;
+			j++;			
 		}				
 				
-		if ( melhor.custo < globalMelhor.custo ) {	
-			globalMelhor = melhor;			
-		}
+		if ( melhor.custo < globalMelhor.custo )
+			globalMelhor = melhor;					
 	}			
-	
-	long long ms2 = get_ms() - ms1;
-
-	cout << endl;	
-	cout << "Tempo gasto: " << ( ms2 / 1000.0 ) << " seg" << endl;
-	
+				
 	return globalMelhor;
 }
 

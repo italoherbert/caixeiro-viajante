@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <vector>
 #include <ctime>
+#include <cfloat>
 
 #include "caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h"
 #include "caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.h"
@@ -10,14 +11,16 @@
 #include "caixeiroviajante/metaheuristica/BuscaLocal.h"
 #include "caixeiroviajante/metaheuristica/Perturbacao.h"
 
+#include "util/util.h"
+
 using namespace std;
 
-int main(int argc, char** argv) {
+int main33(int argc, char** argv) {
 	CaixeiroViajanteMetaHeuristica cv;
 	
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/burma14.tsp" );
+		strcpy( inst, "instances/att48.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;
@@ -33,6 +36,50 @@ int main(int argc, char** argv) {
 	cv.imprimeSolucao( s );    
     
     return 0;
+}
+
+int main( int argc, char** argv ) {
+	CaixeiroViajanteMetaHeuristica cv;
+	
+	if ( argc < 2 ) {		
+		char* inst = (char*) malloc( 100 * sizeof( char ) );
+		strcpy( inst, "instances/bays29.tsp" );
+		
+		argv = (char**) malloc( 2 * sizeof( char* ) );
+		argv[1] = inst;
+		
+		argc = 2;
+	}
+				
+    cv.readTSPData( argc, argv );
+    		
+	cout << "Buscando solucao..." << endl;
+	
+	int n = 10;
+			
+	double tempoMedio = 0;	
+	double custoMedio = 0;		
+	for( int i = 0; i < n; i++ ) {		
+		long long ms1 = get_ms();	
+		Solucao s = cv.calculaCaminho();		
+		long long ms2 = get_ms();
+		
+		double tempo =  ( ms2-ms1 ) / 1000.0;
+		cout << "Tempo: " << tempo << " seg   Custo: " << s.custo << endl;
+		
+		tempoMedio += tempo;
+		custoMedio += s.custo;
+	}
+	
+	tempoMedio /= n;
+	custoMedio /= n;
+	
+	cout << endl;
+    cout << "Arquivo: " << argv[1] << endl;
+	cout << "Tempo medio: " << tempoMedio << endl;
+	cout << "Custo medio: " << custoMedio << endl;
+	
+	return 0;
 }
 
 int main2() {

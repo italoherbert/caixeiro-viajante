@@ -19,16 +19,15 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 	Solucao globalMelhor;
 	globalMelhor.custo = DBL_MAX;	
 	
-	int	maxIter = 50;
+	int	maxIter = 10;
 	int maxIterILS = dim;
 	
-	if ( maxIterILS >=  150 )	
-		maxIterILS /= 2;
-					
-	for( int i = 0; i < maxIter; i++ ) {
+	if ( dim >= 100 )
+		maxIterILS /= 2;			
+										
+	for( int i = 0; i < maxIter; i++ ) {				
 		Solucao s = c.construcao( matrizAdj, dim );
-				
-		Solucao melhor = s;
+		Solucao melhor = s;												
 									
 		int j = 0;
 		while( j < maxIterILS ) {		
@@ -47,11 +46,14 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 			for( int k = 0; k < s.sequencia.size()-1; k++ )
 				s.custo += matrizAdj[ s.sequencia[ k ] ][ s.sequencia[ k+1 ] ];				
 			j++;			
-		}				
+		}							
 					
-		if ( melhor.custo < globalMelhor.custo )
-			globalMelhor = melhor;					
+		if ( melhor.custo < globalMelhor.custo )					
+			globalMelhor = melhor;				
+							
+		cout << i+1 << "  ";
 	}			
+	cout << endl;
 				
 	return globalMelhor;
 }

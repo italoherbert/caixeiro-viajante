@@ -30,15 +30,16 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		int r = rand() % nos.size();
 		int k = nos[ r ];
 			
-		vector<InsersaoInfo> insercaoInfos = this->calculaInsercaoInfos( matrizAdj, dim, sequencia, k );						
+		vector<InsersaoInfo> insercaoInfos = this->calculaInsercaoInfos( matrizAdj, dim, sequencia, k );								
+		
 		sort(insercaoInfos.begin(), insercaoInfos.end(), [](InsercaoInfo a, InsercaoInfo b){
 			return a.custo > b.custo;	
-		});		
+		});				
 						
 		double alpha = ((double)rand()+1) / (RAND_MAX+1);
 		
 		int r2 = rand() % ( (int)ceil( alpha * insercaoInfos.size() ) );						
-		int i = insercaoInfos[ r2 ].noI;
+		int i = insercaoInfos[ r2 ].noI;								
 		
 		nos.erase( nos.begin() + r );
 		sequencia.insert( sequencia.begin() + i, k );

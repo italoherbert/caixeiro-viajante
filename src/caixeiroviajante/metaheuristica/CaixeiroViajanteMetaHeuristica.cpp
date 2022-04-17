@@ -22,13 +22,39 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 	int	maxIter = 10;
 	int maxIterILS = dim;
 	
-	if ( dim >= 100 )
-		maxIterILS /= 2;			
-										
+	if ( dim >= 100 ) {	
+		maxIterILS /= 2;		
+		//maxIter *= 2;
+	}
+		
+	int sequencias[ maxIter ][ dim ];
+								
 	for( int i = 0; i < maxIter; i++ ) {				
 		Solucao s = c.construcao( matrizAdj, dim );
-		Solucao melhor = s;												
-									
+		Solucao melhor = s;				
+						
+		if ( i > 0 ) {							
+			double melhorDist = 0;
+			for ( int ii = 0; ii < i; ii++ ) 
+				for( int jj = 0; jj < dim; jj++ )
+					melhorDist += abs( sequencias[ ii ][ jj ] - s.sequencia[ jj ] );				
+				
+			int k = 2;
+			do {
+				s = c.construcao( matrizAdj, dim );
+								
+				double dist = 0;
+				for ( int ii = 0; ii < i; ii++ ) 
+				for( int jj = 0; jj < dim; jj++ )
+					dist += abs( sequencias[ ii ][ jj ] - s.sequencia[ jj ] );
+	
+				if ( dist > melhorDist ) {				
+					melhor = s;
+					melhorDist = dist;
+				}
+			} while( k++ < maxIterK );
+		}
+
 		int j = 0;
 		while( j < maxIterILS ) {		
 			bl.buscaLocal( matrizAdj, dim, &s );
@@ -48,9 +74,13 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 			j++;			
 		}							
 					
-		if ( melhor.custo < globalMelhor.custo )					
+		if ( melhor.custo < globalMelhor.custo ) {								
 			globalMelhor = melhor;				
-							
+		}
+		
+		for( int jj = 0; jj < melhor.sequencia.size(); jj++ )
+				sequencias[ i ][ jj ] = melhor.sequencia[ jj ];
+													
 		cout << i+1 << "  ";
 	}			
 	cout << endl;

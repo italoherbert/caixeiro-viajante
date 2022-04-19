@@ -19,51 +19,56 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 	Solucao globalMelhor;
 	globalMelhor.custo = DBL_MAX;	
 	
-	int	maxIter = 10;
+	int	maxIter = 30;
 	int maxIterILS = dim;
-	
-	if ( dim >= 100 ) {	
-		maxIterILS /= 2;		
-		//maxIter *= 2;
-	}
+
+	int maxIterK = 10;
+	int maxSeqsPiores = 10;
 		
-	int sequencias[ maxIter ][ dim ];
-								
+	if ( dim >= 150 ) 
+		maxIterILS /= 2;	
+												
+	Solucao piores[ maxIter ];
+											
 	for( int i = 0; i < maxIter; i++ ) {				
 		Solucao s = c.construcao( matrizAdj, dim );
 		Solucao melhor = s;				
-						
+										
 		if ( i > 0 ) {							
 			double melhorDist = 0;
 			for ( int ii = 0; ii < i; ii++ ) 
 				for( int jj = 0; jj < dim; jj++ )
-					melhorDist += abs( sequencias[ ii ][ jj ] - s.sequencia[ jj ] );				
+					melhorDist += abs( piores[ ii ].sequencia[ jj ] - s.sequencia[ jj ] );				
 				
-			int k = 2;
-			do {
+			for( int k = 1; k < maxIterK; k++ ) {
 				s = c.construcao( matrizAdj, dim );
 								
 				double dist = 0;
 				for ( int ii = 0; ii < i; ii++ ) 
-				for( int jj = 0; jj < dim; jj++ )
-					dist += abs( sequencias[ ii ][ jj ] - s.sequencia[ jj ] );
+					for( int jj = 0; jj < dim; jj++ )
+						dist += abs( piores[ ii ].sequencia[ jj ] - s.sequencia[ jj ] );
 	
 				if ( dist > melhorDist ) {				
 					melhor = s;
 					melhorDist = dist;
-				}
-			} while( k++ < maxIterK );
-		}
-
+				}				
+			}
+		}	
+					
+		Solucao pior = melhor;
+				
 		int j = 0;
 		while( j < maxIterILS ) {		
 			bl.buscaLocal( matrizAdj, dim, &s );
 						
 		    if ( s.custo < melhor.custo ) {		    	
 				melhor = s;
-				j = 0;
-			}			
+				j = 0;			
+			}
 			
+			if ( s.custo > pior.custo )
+				pior = s;
+
 			s = melhor;
 						
 			per.perturbacao( s.sequencia );
@@ -74,13 +79,11 @@ Solucao CaixeiroViajanteMetaHeuristica::calculaCaminho() {
 			j++;			
 		}							
 					
-		if ( melhor.custo < globalMelhor.custo ) {								
-			globalMelhor = melhor;				
-		}
+		if ( melhor.custo < globalMelhor.custo ) 
+			globalMelhor = melhor;									
+			
+		piores[ i ] = pior;
 		
-		for( int jj = 0; jj < melhor.sequencia.size(); jj++ )
-				sequencias[ i ][ jj ] = melhor.sequencia[ jj ];
-													
 		cout << i+1 << "  ";
 	}			
 	cout << endl;

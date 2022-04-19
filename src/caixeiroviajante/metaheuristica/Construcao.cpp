@@ -31,7 +31,7 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		int k = nos[ r ];
 			
 		vector<InsersaoInfo> insercaoInfos = this->calculaInsercaoInfos( matrizAdj, dim, sequencia, k );								
-		
+							
 		sort(insercaoInfos.begin(), insercaoInfos.end(), [](InsercaoInfo a, InsercaoInfo b){
 			return a.custo > b.custo;	
 		});				
@@ -42,7 +42,7 @@ Solucao Construcao::construcao( double** matrizAdj, int dim ) {
 		int i = insercaoInfos[ r2 ].noI;								
 		
 		nos.erase( nos.begin() + r );
-		sequencia.insert( sequencia.begin() + i, k );
+		sequencia.insert( sequencia.begin() + i, k );												
 	}
 	
 	sequencia.push_back( 0 );		

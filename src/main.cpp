@@ -24,7 +24,7 @@ int main( int argc, char** argv ) {
 
 	if ( argc < 2 ) {		
 		char* inst = (char*) malloc( 100 * sizeof( char ) );
-		strcpy( inst, "instances/a280.tsp" );
+		strcpy( inst, "instances/ali535.tsp" );
 		
 		argv = (char**) malloc( 2 * sizeof( char* ) );
 		argv[1] = inst;
@@ -48,7 +48,7 @@ int main( int argc, char** argv ) {
 	return 0;
 }
 
-int mainPorDir( int argc, char** argv ) {
+int mainOpenDir( int argc, char** argv ) {
 	CaixeiroViajanteMetaHeuristica cv;
 	
 	DIR *dir = opendir( "instances/" );
@@ -66,8 +66,7 @@ int mainPorDir( int argc, char** argv ) {
 		argv[1] = inst;
 		
 		argc = 2;
-	
-					
+				
 	    cv.readTSPData( argc, argv );
 	    		
 		cout << "Buscando solucao..." << endl;
@@ -92,15 +91,15 @@ int mainPorDir( int argc, char** argv ) {
 			custoMedio += s.custo;
 			
 			if ( s.custo < melhor.custo )
-				melhor = s;
+				melhor = s;						
 		}
-		
+				
 		tempoMedio /= n;
 		custoMedio /= n;
 			
 	    cout << argv[1] << " : "<< "T(md)= " << tempoMedio << ";  C(md)= " << custoMedio << endl;
 	    cout << endl;
-	    cout << "T(md)=Tempo médio; C(md)=Custo médio" << endl;
+	    cout << "T(md)=Tempo médio; C(md)=Custo médio" << endl;	    
 	}
 	
 	closedir( dir );

@@ -1,7 +1,7 @@
 #ifndef METAHEURISTICA_CONSTRUCAO_H
 #define METAHEURISTICA_CONSTRUCAO_H
 
-#include "CaixeiroViajanteMetaHeuristica.h"
+#include "CaixeiroViajante.h"
 
 typedef struct InsercaoInfo {
 	int noI;
@@ -9,13 +9,13 @@ typedef struct InsercaoInfo {
 } InsersaoInfo;
 
 class Construcao {
-	
-	private:		
+
+	private:
 		vector<InsersaoInfo> calculaInsercaoInfos( double** matrizAdj, int dim, vector<int>& sequencia, int k );
-			
-	public:		
+
+	public:
 		Solucao construcao( double** matrizAdj, int dim );
-	
+
 };
 
 #endif

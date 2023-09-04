@@ -1,0 +1,212 @@
+# depslib dependency file v1.0
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\caixeiroviajante.cpp
+	<iostream>
+	<fstream>
+	<cstdio>
+	<sstream>
+	<cfloat>
+	"CaixeiroViajante.h"
+	"readData.h"
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\caixeiroviajante.h
+	<vector>
+	<string>
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\readdata.h
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\buscalocal.cpp
+	<vector>
+	<cfloat>
+	<cmath>
+	<ctime>
+	<algorithm>
+	<iterator>
+	<iostream>
+	"BuscaLocal.h"
+
+1693608634 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\buscalocal.h
+	"CaixeiroViajanteMetaHeuristica.h"
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\caixeiroviajantemetaheuristica.h
+	<vector>
+	"../CaixeiroViajante.h"
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\caixeiroviajantemetaheuristica.cpp
+	<iostream>
+	<vector>
+	<cfloat>
+	<cmath>
+	<ctime>
+	<algorithm>
+	<iterator>
+	"CaixeiroViajanteMetaHeuristica.h"
+	"Construcao.h"
+	"BuscaLocal.h"
+	"Perturbacao.h"
+
+1693608634 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\construcao.h
+	"CaixeiroViajanteMetaHeuristica.h"
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\perturbacao.h
+	<vector>
+	"CaixeiroViajanteMetaHeuristica.h"
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\construcao.cpp
+	<iostream>
+	<vector>
+	<cfloat>
+	<cmath>
+	<ctime>
+	<algorithm>
+	<iterator>
+	"Construcao.h"
+	"../../util/util.h"
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\util\util.h
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\metaheuristica\perturbacao.cpp
+	<iostream>
+	<vector>
+	<ctime>
+	<cmath>
+	"Perturbacao.h"
+	"../../util/util.h"
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\minhasolucao\caixeiroviajanteminhasolucao.cpp
+	"CaixeiroViajanteMinhaSolucao.h"
+	<vector>
+	<cfloat>
+	<algorithm>
+
+1693609126 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\minhasolucao\caixeiroviajanteminhasolucao.h
+	"../logica/CaixeiroViajante.h"
+
+1693608810 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\readdata.cpp
+	<iostream>
+	<cstdlib>
+	<fstream>
+	<cmath>
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\util\util.c
+	<sys/time.h>
+
+1693796281 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\main.cpp
+	<iostream>
+	<cstdio>
+	<vector>
+	<ctime>
+	<cfloat>
+	<string>
+	<sys/types.h>
+	<dirent.h>
+	"caixeiroviajante/logica/Construcao.h"
+	"caixeiroviajante/logica/BuscaLocal.h"
+	"caixeiroviajante/logica/Perturbacao.h"
+	"caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h"
+	"caixeiroviajante/grasp/CaixeiroViajanteGRASP.h"
+	"caixeiroviajante/acs/CaixeiroViajanteACS.h"
+	"util/util.h"
+
+1693581111 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\colonia_de_formigas\caixeiroviajantecoloniaformigas.h
+	"../CaixeiroViajante.h"
+
+1693608742 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\colonia_formigas\caixeiroviajantecoloniaformigas.h
+	"../logica/CaixeiroViajante.h"
+
+1693607893 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\colonia_formigas\caixeiroviajantecoloniaformigas.cpp
+	"CaixeiroViajanteColoniaFormigas.h"
+	<vector>
+	<cfloat>
+	<algorithm>
+	<cmath>
+	<time.h>
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\caixeiroviajante.h
+	<vector>
+	<string>
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\caixeiroviajante.cpp
+	<iostream>
+	<fstream>
+	<cstdio>
+	<sstream>
+	<cfloat>
+	"CaixeiroViajante.h"
+	"readData.h"
+
+1693580104 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\readdata.h
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\readdata.cpp
+	<iostream>
+	<cstdlib>
+	<fstream>
+	<cmath>
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\construcao.cpp
+	<iostream>
+	<vector>
+	<cfloat>
+	<cmath>
+	<ctime>
+	<algorithm>
+	<iterator>
+	"Construcao.h"
+	"../../util/util.h"
+
+1693609014 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\construcao.h
+	"CaixeiroViajante.h"
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\buscalocal.cpp
+	<vector>
+	<cfloat>
+	<cmath>
+	<ctime>
+	<algorithm>
+	<iterator>
+	<iostream>
+	"BuscaLocal.h"
+
+1693609035 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\buscalocal.h
+	"CaixeiroViajante.h"
+
+1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\perturbacao.cpp
+	<iostream>
+	<vector>
+	<ctime>
+	<cmath>
+	"Perturbacao.h"
+	"../../util/util.h"
+
+1693609044 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\perturbacao.h
+	<vector>
+	"CaixeiroViajante.h"
+
+1693608920 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\grasp\caixeiroviajantegrasp.cpp
+	<iostream>
+	<vector>
+	<cfloat>
+	<cmath>
+	<ctime>
+	<algorithm>
+	<iterator>
+	"CaixeiroViajanteGRASP.h"
+	"../logica/Construcao.h"
+	"../logica/BuscaLocal.h"
+	"../logica/Perturbacao.h"
+
+1693609617 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\grasp\caixeiroviajantegrasp.h
+	<vector>
+	"../logica/CaixeiroViajante.h"
+
+1693796457 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.cpp
+	"CaixeiroViajanteACS.h"
+	<vector>
+	<cfloat>
+	<algorithm>
+	<cmath>
+	<time.h>
+	"../logica/BuscaLocal.h"
+
+1693795311 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.h
+	"../logica/CaixeiroViajante.h"
+

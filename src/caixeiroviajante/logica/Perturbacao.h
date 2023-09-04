@@ -3,13 +3,13 @@
 
 #include <vector>
 
-#include "CaixeiroViajanteMetaHeuristica.h"
+#include "CaixeiroViajante.h"
 
 class Perturbacao {
-				
-	public:		
+
+	public:
 		void perturbacao( vector<int>& sequencia );
-	
+
 };
 
 #endif

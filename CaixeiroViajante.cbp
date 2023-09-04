@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CaixeiroViajante" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="CaixeiroViajante" prefix_auto="1" extension_auto="1" />
+				<Option object_output="bin" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Unit filename="src/caixeiroviajante/CaixeiroViajante.cpp" />
+		<Unit filename="src/caixeiroviajante/CaixeiroViajante.h" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/BuscaLocal.cpp" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/BuscaLocal.h" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.cpp" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.h" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristicaListener.h" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/Construcao.cpp" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/Construcao.h" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/Perturbacao.cpp" />
+		<Unit filename="src/caixeiroviajante/metaheuristica/Perturbacao.h" />
+		<Unit filename="src/caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.cpp" />
+		<Unit filename="src/caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h" />
+		<Unit filename="src/caixeiroviajante/readData.cpp" />
+		<Unit filename="src/caixeiroviajante/readData.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/util/util.c">
+			<Option compilerVar="CPP" />
+		</Unit>
+		<Unit filename="src/util/util.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -22,7 +22,7 @@ class CaixeiroViajanteACS : public CaixeiroViajante {
         double alfa = 1;
         double beta = 3;
 
-        int nIteracoes = 100;
+        int nIteracoes = 50;
         int formigasLen = 10;
 
         Formiga* formigas;

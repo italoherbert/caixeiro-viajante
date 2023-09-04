@@ -100,7 +100,6 @@ void CaixeiroViajanteACS::atualizaFeromoniosGlobal( Formiga formiga ) {
         int i = formiga.solucao.sequencia[ k ];
         int j = formiga.solucao.sequencia[ k+1 ];
         double formigaFeromonio = formiga.feromonios[ i ][ j ];
-        double fatorP = 1.0 / formiga.solucao.custo;
         feromonios[ i ][ j ] = ( 1.0 - feromonioAtualizacaoGlobalFator ) * feromonios[ i ][ j ] + feromonioAtualizacaoGlobalFator * formigaFeromonio;
     }
 }

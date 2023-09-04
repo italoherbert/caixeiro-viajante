@@ -90,7 +90,7 @@
 1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\util\util.c
 	<sys/time.h>
 
-1693796281 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\main.cpp
+1693801170 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\main.cpp
 	<iostream>
 	<cstdio>
 	<vector>
@@ -198,7 +198,7 @@
 	<vector>
 	"../logica/CaixeiroViajante.h"
 
-1693796457 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.cpp
+1693801645 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.cpp
 	"CaixeiroViajanteACS.h"
 	<vector>
 	<cfloat>
@@ -207,6 +207,6 @@
 	<time.h>
 	"../logica/BuscaLocal.h"
 
-1693795311 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.h
+1693801537 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.h
 	"../logica/CaixeiroViajante.h"
 

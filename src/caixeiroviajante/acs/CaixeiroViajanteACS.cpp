@@ -19,7 +19,7 @@ Solucao CaixeiroViajanteACS::calculaCaminho() {
 
     srand( time( NULL ) );
 
-    for( int iter = 0; iter < 100; iter++ ) {
+    for( int iter = 0; iter < nIteracoes; iter++ ) {
         reiniciaFormigas();
 
         Solucao melhorS;
@@ -127,9 +127,8 @@ void CaixeiroViajanteACS::construcao( double** feromoniosLocal, int i, vector<in
 
         (*custo) += matrizAdj[ i ][ melhorJ ];
 
-        double fatorP = 1.0d / (dim * (*custo) );
+        double fatorP = 1.0 / dim;
         feromoniosLocal[ i ][ melhorJ ] = ( 1.0 - feromonioAtualizacaoLocalFator ) * feromoniosLocal[ i ][ melhorJ ] + feromonioAtualizacaoLocalFator * fatorP;
-
 
         if ( S[ S.size()-1 ] == S[ 0 ] ) {
             if ( !Q.empty() ) {
@@ -189,7 +188,6 @@ void CaixeiroViajanteACS::probabilidades( int i, vector<int>& Q ) {
 
 int CaixeiroViajanteACS::melhor( int i, vector<int>& Q ) {
     int melhorJ = -1;
-    double melhorP = 0;
 
     srand( time( NULL ) );
     double r = (double)(rand() % RAND_MAX) / (double)RAND_MAX;
@@ -197,10 +195,8 @@ int CaixeiroViajanteACS::melhor( int i, vector<int>& Q ) {
     double soma = 0;
     for( int j = 0; melhorJ == -1 && j < probsLen; j++ ) {
         soma += probs[ j ];
-        if ( r <= soma ) {
+        if ( r <= soma )
             melhorJ = probsJs[ j ];
-            melhorP = probs[ j ];
-        }
     }
 
     return melhorJ;

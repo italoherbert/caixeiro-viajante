@@ -18,10 +18,11 @@ class CaixeiroViajanteACS : public CaixeiroViajante {
 
         double feromonioAtualizacaoLocalFator = 0.1;
         double feromonioAtualizacaoGlobalFator = 0.1;
-        double feromonioIni = 0.05;
+        double feromonioIni = 0.01;
         double alfa = 1;
-        double beta = 5;
+        double beta = 3;
 
+        int nIteracoes = 100;
         int formigasLen = 10;
 
         Formiga* formigas;

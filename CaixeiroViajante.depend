@@ -90,7 +90,7 @@
 1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\util\util.c
 	<sys/time.h>
 
-1693854712 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\main.cpp
+1693952730 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\main.cpp
 	<iostream>
 	<cstdio>
 	<vector>
@@ -156,7 +156,7 @@
 1693609014 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\construcao.h
 	"CaixeiroViajante.h"
 
-1693580104 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\buscalocal.cpp
+1693868096 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\logica\buscalocal.cpp
 	<vector>
 	<cfloat>
 	<cmath>
@@ -181,7 +181,7 @@
 	<vector>
 	"CaixeiroViajante.h"
 
-1693608920 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\grasp\caixeiroviajantegrasp.cpp
+1693867497 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\grasp\caixeiroviajantegrasp.cpp
 	<iostream>
 	<vector>
 	<cfloat>
@@ -198,7 +198,7 @@
 	<vector>
 	"../logica/CaixeiroViajante.h"
 
-1693857885 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.cpp
+1693952312 source:c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.cpp
 	"CaixeiroViajanteACS.h"
 	<vector>
 	<cfloat>
@@ -206,8 +206,8 @@
 	<cmath>
 	<time.h>
 	"../logica/BuscaLocal.h"
-	"../logica/Perturbacao.h"
+	"../../util/util.h"
 
-1693857862 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.h
+1693953033 c:\users\italo\cpp-workspace\caixeiro-viajante\src\caixeiroviajante\acs\caixeiroviajanteacs.h
 	"../logica/CaixeiroViajante.h"
 

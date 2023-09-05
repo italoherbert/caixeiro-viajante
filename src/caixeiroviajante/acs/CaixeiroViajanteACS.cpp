@@ -7,21 +7,19 @@
 #include <time.h>
 
 #include "../logica/BuscaLocal.h"
-#include "../logica/Perturbacao.h"
+
+#include "../../util/util.h"
 
 Solucao CaixeiroViajanteACS::calculaCaminho() {
     BuscaLocal bl;
-    Perturbacao pert;
+
+    srand( time( 0 ) );
 
     inicializa();
 
     Solucao melhorSolucao;
     melhorSolucao.sequencia = {};
     melhorSolucao.custo = INFINITY;
-
-    double melhorCusto = dim * 1000;
-
-    srand( time( NULL ) );
 
     for( int iter = 0; iter < nIteracoes; iter++ ) {
         reiniciaFormigas();
@@ -35,36 +33,38 @@ Solucao CaixeiroViajanteACS::calculaCaminho() {
 
         for( int k = 0; k < formigasLen; k++ ) {
             int i = rand() % dim;
-            if ( i == dim )
-                i--;
 
             Formiga f = formigas[ k ];
             vector<int> Q = {};
 
-            construcao( f.feromonios, i, f.solucao.sequencia, Q, &f.solucao.custo, melhorCusto );
-
-            f.solucaoConstruida = f.solucao;
+            bool construiu = construcao( i, f.solucao.sequencia, Q, &f.solucao.custo );
+            if ( !construiu )
+                continue;
 
             bl.buscaLocal( matrizAdj, dim, &f.solucao );
+
+            atualizaFeromonioLocalAposBuscaLocal( f.feromonios, f.solucao.sequencia );
 
             if ( f.solucao.custo < melhorFormiga.solucao.custo )
                 melhorFormiga = f;
         }
 
+        if ( melhorFormiga.solucao.custo < melhorSolucao.custo )
+            melhorSolucao = melhorFormiga.solucao;
+
         atualizaFeromoniosGlobal( melhorFormiga );
 
-        if ( melhorFormiga.solucao.custo < melhorSolucao.custo ) {
-            melhorSolucao = melhorFormiga.solucao;
-            melhorCusto = melhorFormiga.solucao.custo;
-        }
-
-        printf( "%d ", iter );
+        printf( "%d ", iter+1 );
     }
+
+    printf( "\n\n" );
 
     return melhorSolucao;
 }
 
 void CaixeiroViajanteACS::inicializa() {
+    feromonioIni = 1.0 / pow( dim, 2 );
+
     feromonios = new double *[dim];
     for( int i = 0; i < dim; i++ ) {
         feromonios[ i ] = new double[ dim ];
@@ -78,7 +78,7 @@ void CaixeiroViajanteACS::inicializa() {
         for( int fi = 0; fi < dim; fi++ ) {
             formigas[ i ].feromonios[ fi ] = new double[ dim ];
             for( int fj = 0; fj < dim; fj++ )
-                formigas[ i ].feromonios[ fi ][ fj ] = feromonioIni;
+                formigas[ i ].feromonios[ fi ][ fj ] = 0;
         }
 
         Solucao s;
@@ -88,9 +88,9 @@ void CaixeiroViajanteACS::inicializa() {
         formigas[ i ].solucao = s;
     }
 
-    probs = new double[ dim ];
-    probsJs = new int[ dim ];
-    probsLen = 0;
+    probsAux = new double[ dim ];
+    probsJsAux = new int[ dim ];
+    probsAuxLen = 0;
 }
 
 void CaixeiroViajanteACS::reiniciaFormigas() {
@@ -98,76 +98,127 @@ void CaixeiroViajanteACS::reiniciaFormigas() {
         for( int i = 0; i < dim; i++ )
             for( int j = 0; j < dim; j++ )
                 formigas[ k ].feromonios[ i ][ j ] = 0;
-        Solucao s;
-        s.sequencia = {};
-        s.custo = 0;
 
-        formigas[ k ].solucao = s;
+        formigas[ k ].solucao.sequencia = {};
+        formigas[ k ].solucao.custo = 0;
     }
 }
 
 void CaixeiroViajanteACS::atualizaFeromoniosGlobal( Formiga formiga ) {
-    for( int k = 0; k < dim-1; k++ ) {
-        int i = formiga.solucaoConstruida.sequencia[ k ];
-        int j = formiga.solucaoConstruida.sequencia[ k+1 ];
-        double formigaFeromonio = formiga.feromonios[ i ][ j ];
-        feromonios[ i ][ j ] = ( 1.0 - feromonioAtualizacaoGlobalFator ) * feromonios[ i ][ j ] + feromonioAtualizacaoGlobalFator * formigaFeromonio;
+    for( int i = 0; i < dim; i++ ) {
+        for( int j = 0; j < dim; j++ ) {
+            double formigaFeromonio = formiga.feromonios[ i ][ j ];
+            feromonios[ i ][ j ] = ( 1.0 - feromonioGlobalFator ) * feromonios[ i ][ j ] + ( feromonioGlobalFator * formigaFeromonio );
+        }
     }
 }
 
-void CaixeiroViajanteACS::atualizaFeromonioLocal( double** feromoniosLocal, int i, int melhorJ, double melhorP, double melhorCusto ) {
-    double p = dim / ( melhorP * melhorCusto );
-    feromoniosLocal[ i ][ melhorJ ] = ( 1.0 - feromonioAtualizacaoLocalFator ) * feromoniosLocal[ i ][ melhorJ ] + feromonioAtualizacaoLocalFator * p;
+void CaixeiroViajanteACS::atualizaFeromonioLocal( double** feromoniosLocal, int i, int melhorJ ) {
+    feromoniosLocal[ i ][ melhorJ ] = ( 1.0 - feromonioLocalFator ) * feromoniosLocal[ i ][ melhorJ ] + ( feromonioLocalFator * feromonioIni );
 }
 
-void CaixeiroViajanteACS::construcao( double** feromoniosLocal, int i, vector<int>& S, vector<int>& Q, double* custo, double melhorCusto ) {
+void CaixeiroViajanteACS::atualizaFeromonioLocalAposBuscaLocal( double** feromoniosLocal, vector<int>& sequencia ) {
+    for( int i = 0; i < dim; i++ )
+        for( int j = 0; j < dim; j++ )
+            feromoniosLocal[ i ][ j ] = 0;
+
+    vector<int> Q = {};
+    copy( sequencia.begin(), sequencia.end(), std::back_inserter( Q ) );
+
+    int i = Q[ 0 ];
+    Q.erase( Q.begin() );
+    while( !Q.empty() ) {
+        int j = Q[ 0 ];
+
+        atualizaFeromonioLocal( feromoniosLocal, i, j );
+
+        i = j;
+        Q.erase( Q.begin() );
+    }
+}
+
+bool CaixeiroViajanteACS::construcao( int i, vector<int>& S, vector<int>& Q, double* custo ) {
     if ( S.size() == 0 ) {
         S.push_back( i );
         for( int j = 0; j < dim; j++ )
-            if ( j != i )
+            if ( i != j )
                 Q.push_back( j );
-        construcao( feromoniosLocal, i, S, Q, custo, melhorCusto );
+        return construcao( i, S, Q, custo );
     } else if ( Q.size() > 0 ) {
-        probabilidades( i, Q );
+        int melhorJ = selecionaMelhorVizinho( i, Q );
 
-        int melhorJ;
-        double melhorP;
-        selecionaMelhor( i, Q, &melhorJ, &melhorP );
+        if ( melhorJ != -1 ) {
+            int k = -1;
+            for( int j = 0; k == -1 && j < Q.size(); j++ )
+                if ( Q[j] == melhorJ )
+                    k = j;
 
-        atualizaFeromonioLocal( feromoniosLocal, i, melhorJ, melhorP, melhorCusto );
+            Q.erase( Q.begin() + k );
+            S.push_back( melhorJ );
 
-        int k = -1;
-        for( int j = 0; k == -1 && j != Q.size(); j++ )
-            if ( Q[j] == melhorJ )
-                k = j;
+            (*custo) += matrizAdj[ i ][ melhorJ ];
 
-        Q.erase( Q.begin() + k );
-        S.push_back( melhorJ );
-
-        (*custo) += matrizAdj[ i ][ melhorJ ];
-
-        if ( S[ S.size()-1 ] == S[ 0 ] ) {
-            if ( !Q.empty() ) {
-                int j = S[ S.size() - 1 ];
-                S.erase( S.begin() + S.size() - 1 );
-                Q.push_back( j );
-                (*custo) -= matrizAdj[ i ][ j ];
-
-                construcao( feromoniosLocal, S[ S.size() - 1 ], S, Q, custo, melhorCusto );
-            }
+            return construcao( melhorJ, S, Q, custo );
         } else {
-            construcao( feromoniosLocal, melhorJ, S, Q, custo, melhorCusto );
+            return false;
         }
     } else {
-        Q.push_back( S[ 0 ] );
-        construcao( feromoniosLocal, i, S, Q, custo, melhorCusto );
+        if ( S[ 0 ] != S[ S.size() -1 ] ) {
+            Q.push_back( S[ 0 ] );
+            return construcao( i, S, Q, custo );
+        } else {
+            return true;
+        }
     }
 }
 
-void CaixeiroViajanteACS::probabilidades( int i, vector<int>& Q ) {
+int CaixeiroViajanteACS::selecionaMelhorVizinho( int i, vector<int>& Q ) {
+    int melhorJ = -1;
+
+    double q = (double)rand() / (double)RAND_MAX;
+
+    if ( q <= q0 ) {
+        melhorJ = probabilidadeArgmaxVizinho( i, Q );
+    } else {
+        probabilidades( i, Q, probsAux, probsJsAux, &probsAuxLen );
+
+        double r = (double)rand() / (double)RAND_MAX;
+
+        double soma = 0;
+        for( int j = 0; melhorJ == -1 && j < probsAuxLen; j++ ) {
+            soma += probsAux[ j ];
+            if ( r <= soma )
+                melhorJ = probsJsAux[ j ];
+        }
+    }
+    return melhorJ;
+}
+
+int CaixeiroViajanteACS::probabilidadeArgmaxVizinho( int i, vector<int>& Q ) {
+    double argmaxP = -INFINITY;
+    int argmaxJ = -1;
+    for( int k = 0; k < Q.size(); k++ ) {
+        int j = Q[ k ];
+
+        if ( matrizAdj[ i ][ j ] > 0 ) {
+            double f = feromonios[ i ][ j ];
+            double invDist = 1.0 / matrizAdj[ i ][ j ];
+
+            double p = f * pow( invDist, beta );
+            if ( p > argmaxP ) {
+                argmaxP = p;
+                argmaxJ = j;
+            }
+        }
+    }
+
+    return argmaxJ;
+}
+
+void CaixeiroViajanteACS::probabilidades( int i, vector<int>& Q, double* probs, int* probsJs, int* probsLen ) {
     double somaVizinhosP = 0;
-    for( auto it = Q.begin(); it != Q.end(); it++ ) {
-        int j = *it;
+    for( int it = 0; it < Q.size(); it++ ) {
+        int j = Q[ it ];
 
         if ( matrizAdj[ i ][ j ] > 0 ) {
             double f = feromonios[ i ][ j ];
@@ -177,10 +228,10 @@ void CaixeiroViajanteACS::probabilidades( int i, vector<int>& Q ) {
         }
     }
 
-    probsLen = 0;
+    *probsLen = 0;
 
-    for( auto it = Q.begin(); it != Q.end(); it++ ) {
-        int j = *it;
+    for( int it = 0; it < Q.size(); it++ ) {
+        int j = Q[ it ];
 
         if ( matrizAdj[ i ][ j ] > 0 ) {
             double f = feromonios[ i ][ j ];
@@ -193,26 +244,9 @@ void CaixeiroViajanteACS::probabilidades( int i, vector<int>& Q ) {
                 p = ( pow( f, alfa ) * pow( invDist, beta ) ) / somaVizinhosP;
             }
 
-            probs[ probsLen ] = p;
-            probsJs[ probsLen ] = j;
-            probsLen++;
-        }
-    }
-}
-
-void CaixeiroViajanteACS::selecionaMelhor( int i, vector<int>& Q, int* melhorJ, double* melhorP ) {
-    *melhorJ = -1;
-    *melhorP = 0;
-
-    srand( time( NULL ) );
-    double r = (double)(rand() % RAND_MAX) / (double)RAND_MAX;
-
-    double soma = 0;
-    for( int j = 0; *melhorJ == -1 && j < probsLen; j++ ) {
-        soma += probs[ j ];
-        if ( r <= soma ) {
-            *melhorJ = probsJs[ j ];
-            *melhorP = probs[ j ];
+            probs[ *probsLen ] = p;
+            probsJs[ *probsLen ] = j;
+            (*probsLen)++;
         }
     }
 }

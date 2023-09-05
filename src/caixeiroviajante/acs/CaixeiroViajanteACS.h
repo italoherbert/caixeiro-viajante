@@ -6,38 +6,42 @@
 typedef struct TFormiga {
     double** feromonios;
     Solucao solucao;
-    Solucao solucaoConstruida;
 } Formiga;
 
 class CaixeiroViajanteACS : public CaixeiroViajante {
 
     private:
         double** feromonios;
-        double* probs;
-        int* probsJs;
-        int probsLen;
 
-        double feromonioAtualizacaoLocalFator = 0.1;
-        double feromonioAtualizacaoGlobalFator = 0.1;
-        double feromonioIni = 0.01;
-        double alfa = 1;
-        double beta = 5;
+        double* probsAux;
+        int* probsJsAux;
+        int probsAuxLen;
+
+        double feromonioLocalFator = 0.1;
+        double feromonioGlobalFator = 0.1;
+        double feromonioIni = 0.0001;
+        double alfa = 0.4;
+        double beta = 2;
+        double q0 = 0.9;
 
         int nIteracoes = 100;
-        int formigasLen = 10;
+        int formigasLen = 20;
 
         Formiga* formigas;
 
         void inicializa();
         void reiniciaFormigas();
         void atualizaFeromoniosGlobal( Formiga formiga );
-        void atualizaFeromonioLocal( double** feromoniosLocal, int i, int melhorJ, double melhorP, double melhorCusto );
+        void atualizaFeromonioLocal( double** feromoniosLocal, int i, int melhorJ );
 
-        void construcao( double** feromoniosLocal, int i, vector<int>& S, vector<int>& Q, double* custo, double melhorCusto );
+        bool construcao( int i, vector<int>& S, vector<int>& Q, double* custo );
 
-        void probabilidades( int i, vector<int>& Q );
-        void selecionaMelhor( int i, vector<int>& Q, int *melhorJ, double* melhorP );
+        int selecionaMelhorVizinho( int i, vector<int>& Q );
 
+        int probabilidadeArgmaxVizinho( int i, vector<int>& Q );
+        void probabilidades( int i, vector<int>& Q, double* probs, int* probsJs, int* probsLen );
+
+        void atualizaFeromonioLocalAposBuscaLocal( double** feromoniosLocal, vector<int>& sequencia );
     public:
 		Solucao calculaCaminho();
 

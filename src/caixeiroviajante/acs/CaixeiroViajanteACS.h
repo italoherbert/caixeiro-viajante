@@ -24,7 +24,7 @@ class CaixeiroViajanteACS : public CaixeiroViajante {
         double beta = 2;
         double q0 = 0.9;
 
-        int nIteracoes = 100;
+        int nIteracoes = 150;
         int formigasLen = 20;
 
         Formiga* formigas;
@@ -32,7 +32,7 @@ class CaixeiroViajanteACS : public CaixeiroViajante {
         void inicializa();
         void reiniciaFormigas();
         void atualizaFeromoniosGlobal( Formiga formiga );
-        void atualizaFeromonioLocal( double** feromoniosLocal, int i, int melhorJ );
+        void atualizaFeromoniosLocal( Formiga formiga );
 
         bool construcao( int i, vector<int>& S, vector<int>& Q, double* custo );
 
@@ -41,7 +41,6 @@ class CaixeiroViajanteACS : public CaixeiroViajante {
         int probabilidadeArgmaxVizinho( int i, vector<int>& Q );
         void probabilidades( int i, vector<int>& Q, double* probs, int* probsJs, int* probsLen );
 
-        void atualizaFeromonioLocalAposBuscaLocal( double** feromoniosLocal, vector<int>& sequencia );
     public:
 		Solucao calculaCaminho();
 

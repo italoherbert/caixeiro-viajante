@@ -14,20 +14,24 @@
 			</Target>
 		</Build>
 		<Unit filename="src/caixeiroviajante/CaixeiroViajante.cpp" />
-		<Unit filename="src/caixeiroviajante/CaixeiroViajante.h" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/BuscaLocal.cpp" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/BuscaLocal.h" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.cpp" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristica.h" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/CaixeiroViajanteMetaHeuristicaListener.h" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/Construcao.cpp" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/Construcao.h" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/Perturbacao.cpp" />
-		<Unit filename="src/caixeiroviajante/metaheuristica/Perturbacao.h" />
+		<Unit filename="src/caixeiroviajante/acs/CaixeiroViajanteACS.cpp" />
+		<Unit filename="src/caixeiroviajante/acs/CaixeiroViajanteACS.h" />
+		<Unit filename="src/caixeiroviajante/grasp/CaixeiroViajanteGRASP.cpp" />
+		<Unit filename="src/caixeiroviajante/grasp/CaixeiroViajanteGRASP.h" />
+		<Unit filename="src/caixeiroviajante/grasp/CaixeiroViajanteGRASPListener.h" />
+		<Unit filename="src/caixeiroviajante/logica/BuscaLocal.cpp" />
+		<Unit filename="src/caixeiroviajante/logica/BuscaLocal.h" />
+		<Unit filename="src/caixeiroviajante/logica/CaixeiroViajante.cpp" />
+		<Unit filename="src/caixeiroviajante/logica/CaixeiroViajante.h" />
+		<Unit filename="src/caixeiroviajante/logica/Construcao.cpp" />
+		<Unit filename="src/caixeiroviajante/logica/Construcao.h" />
+		<Unit filename="src/caixeiroviajante/logica/Perturbacao.cpp" />
+		<Unit filename="src/caixeiroviajante/logica/Perturbacao.h" />
+		<Unit filename="src/caixeiroviajante/logica/readData.cpp" />
+		<Unit filename="src/caixeiroviajante/logica/readData.h" />
 		<Unit filename="src/caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.cpp" />
 		<Unit filename="src/caixeiroviajante/minhasolucao/CaixeiroViajanteMinhaSolucao.h" />
 		<Unit filename="src/caixeiroviajante/readData.cpp" />
-		<Unit filename="src/caixeiroviajante/readData.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/util/util.c">
 			<Option compilerVar="CPP" />

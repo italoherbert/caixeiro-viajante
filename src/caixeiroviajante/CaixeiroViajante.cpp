@@ -4,8 +4,8 @@
 #include <sstream>
 #include <cfloat>
 
-#include "CaixeiroViajante.h"
-#include "readData.h"
+#include "logica/CaixeiroViajante.h"
+#include "logica/readData.h"
 
 bool CaixeiroViajante::carregaMatrizAdj( string arquivo ) {
 	fstream stream;
